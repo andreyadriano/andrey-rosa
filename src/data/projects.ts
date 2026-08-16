@@ -96,8 +96,7 @@ export const projectsByLang: ProjectsData = {
       title: "Commercial site for Disk Gás",
       date: "2023-06-01",
       featured: true,
-      description:
-        "Business site for a local shop, directing customers to WhatsApp. I still maintain it.",
+      description: "Business site for a local shop, directing customers to WhatsApp. I still maintain it.",
       tags: ["HTML", "CSS", "JavaScript"],
       links: [
         {
