@@ -41,7 +41,7 @@ export async function GET(
   return new NextResponse(new Uint8Array(buffer), {
     headers: {
       "Content-Type": "application/pdf",
-      "Content-Disposition": `attachment; filename="cv-andrey-${lang}.pdf"`,
+      "Content-Disposition": `attachment; filename="CV_Andrey_Rosa_${lang.toUpperCase()}.pdf"`,
       "Cache-Control": "no-store",
     },
   });

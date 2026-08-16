@@ -6,7 +6,7 @@ export interface ExperienceItem {
   company: string;
   position: string;
   period: string;
-  description: string;
+  highlights: string[];
 }
 
 export interface EducationItem {
@@ -19,6 +19,7 @@ export interface Resume {
   name: string;
   role: string;
   email: string;
+  linkedin: string;
   summary: string;
   skills: string[];
   languages: string[];

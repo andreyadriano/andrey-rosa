@@ -36,7 +36,7 @@ export default async function ResumePage({ params }: ResumePageProps) {
           </div>
           <a
             href={`/${lang}/resume/pdf`}
-            download={`cv-andrey-${lang}.pdf`}
+            download={`CV_Andrey_Rosa_${lang.toUpperCase()}.pdf`}
             className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-fg hover:bg-accent-hover transition-colors"
           >
             <Download size={16} strokeWidth={1.75} />
@@ -47,7 +47,17 @@ export default async function ResumePage({ params }: ResumePageProps) {
         <div className="mt-12 max-w-3xl">
           <h2 className="font-mono text-2xl text-fg">{data.name}</h2>
           <p className="mt-1 text-accent">{data.role}</p>
-          <p className="mt-1 text-sm text-fg-muted">{data.email}</p>
+          <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-fg-muted">
+            <span>{data.email}</span>
+            <a
+              href={`https://${data.linkedin}`}
+              target="_blank"
+              rel="noreferrer"
+              className="text-accent-2 hover:text-accent-2-hover underline underline-offset-4 decoration-accent-2/40 transition-colors"
+            >
+              {data.linkedin}
+            </a>
+          </div>
           <p className="mt-5 text-fg-subtle leading-relaxed">{data.summary}</p>
 
           <div className="mt-12">
@@ -64,9 +74,13 @@ export default async function ResumePage({ params }: ResumePageProps) {
                     </span>
                   </div>
                   <p className="text-sm text-fg-muted">{item.company}</p>
-                  <p className="mt-2 text-sm text-fg-subtle leading-relaxed">
-                    {item.description}
-                  </p>
+                  {item.highlights.length > 0 && (
+                    <ul className="mt-2 space-y-1.5 text-sm text-fg-subtle leading-relaxed list-disc pl-4">
+                      {item.highlights.map((highlight) => (
+                        <li key={highlight}>{highlight}</li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               ))}
             </div>

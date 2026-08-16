@@ -18,47 +18,51 @@ const BORDER = "#d8ddd9";
 
 const styles = StyleSheet.create({
   page: {
-    paddingVertical: 26,
+    paddingVertical: 18,
     paddingHorizontal: 48,
     fontFamily: "Helvetica",
-    fontSize: 10,
+    fontSize: 9.5,
     color: INK,
   },
   name: {
     fontFamily: "Helvetica-Bold",
-    fontSize: 20,
+    fontSize: 19,
   },
   role: {
     marginTop: 2,
-    fontSize: 11.5,
+    fontSize: 11,
     color: ACCENT,
   },
-  email: {
-    marginTop: 4,
-    fontSize: 9,
+  contactRow: {
+    marginTop: 3,
+    flexDirection: "row",
+    gap: 10,
+  },
+  contactItem: {
+    fontSize: 8.5,
     color: MUTED,
   },
   summary: {
-    marginTop: 12,
-    lineHeight: 1.15,
+    marginTop: 10,
+    lineHeight: 1.12,
     color: INK,
   },
   section: {
-    marginTop: 11,
+    marginTop: 7,
   },
   sectionTitle: {
     fontFamily: "Helvetica-Bold",
-    fontSize: 10,
+    fontSize: 9.5,
     letterSpacing: 1.2,
     textTransform: "uppercase",
     color: ACCENT,
-    marginBottom: 7,
+    marginBottom: 4,
     borderBottomWidth: 1,
     borderBottomColor: BORDER,
-    paddingBottom: 5,
+    paddingBottom: 3,
   },
   entry: {
-    marginBottom: 8,
+    marginBottom: 5,
   },
   entryHeaderRow: {
     flexDirection: "row",
@@ -66,20 +70,28 @@ const styles = StyleSheet.create({
   },
   entryTitle: {
     fontFamily: "Helvetica-Bold",
-    fontSize: 12,
+    fontSize: 11,
   },
   entryPeriod: {
-    fontSize: 9,
+    fontSize: 8.5,
     color: MUTED,
   },
   entrySubtitle: {
-    fontSize: 9.5,
+    fontSize: 9,
     color: MUTED,
     marginTop: 1,
   },
-  entryDescription: {
-    marginTop: 3,
-    lineHeight: 1.15,
+  highlight: {
+    flexDirection: "row",
+    marginTop: 2,
+    gap: 4,
+  },
+  highlightBullet: {
+    lineHeight: 1.12,
+  },
+  highlightText: {
+    flex: 1,
+    lineHeight: 1.12,
   },
   plainList: {
     lineHeight: 1.2,
@@ -105,7 +117,10 @@ export function ResumeDocument({
       <Page size="A4" style={styles.page}>
         <Text style={styles.name}>{resume.name}</Text>
         <Text style={styles.role}>{resume.role}</Text>
-        <Text style={styles.email}>{resume.email}</Text>
+        <View style={styles.contactRow}>
+          <Text style={styles.contactItem}>{resume.email}</Text>
+          <Text style={styles.contactItem}>{resume.linkedin}</Text>
+        </View>
 
         <Text style={styles.summary}>{resume.summary}</Text>
 
@@ -122,7 +137,12 @@ export function ResumeDocument({
                 <Text style={styles.entryPeriod}>{item.period}</Text>
               </View>
               <Text style={styles.entrySubtitle}>{item.company}</Text>
-              <Text style={styles.entryDescription}>{item.description}</Text>
+              {item.highlights.map((highlight) => (
+                <View key={highlight} style={styles.highlight}>
+                  <Text style={styles.highlightBullet}>•</Text>
+                  <Text style={styles.highlightText}>{highlight}</Text>
+                </View>
+              ))}
             </View>
           ))}
         </View>

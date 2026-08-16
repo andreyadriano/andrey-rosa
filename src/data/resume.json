@@ -3,6 +3,7 @@
     "name": "Andrey Adriano da Rosa",
     "role": "Desenvolvedor Fullstack | VoIP & Linux Embarcado",
     "email": "andrey.adriano01@hotmail.com",
+    "linkedin": "linkedin.com/in/andrey-adriano-da-rosa",
     "summary": "Engenheiro de Telecomunicações e desenvolvedor de software com 3 anos de experiência, dedicado a evoluir e entregar cada vez mais. Minha experiência profissional envolve o desenvolvimento de soluções VoIP e aplicações fullstack para produtos de telefonia IP, como telefones, centrais telefônicas e softphones — atuando desde o Linux embarcado até o desenvolvimento web, com diversas linguagens e frameworks.",
     "skills": [
       "Go",
@@ -45,19 +46,28 @@
         "company": "Intelbras",
         "position": "Desenvolvedor Fullstack | VoIP | Linux Embarcado",
         "period": "Março de 2025 - Presente",
-        "description": "Atuo no P&D de Comunicação Corporativa com foco em VoIP e produtos de telefonia (telefones e centrais telefônicas), do levantamento de requisitos ao lançamento. Desenvolvimento de central de comunicação baseada em Asterisk (Golang, C, Lua, React, firmware em OpenWrt); manutenção de telefones SIP baseados em PJSIP (C, Lua, AngularJS, firmware Yocto/Bitbake); e de softphone Android em Java, além de atuação com QA, pós-vendas e clientes em testes de campo."
+        "highlights": [
+          "No P&D de Comunicação Corporativa, participei do desenvolvimento completo de uma central de comunicação para condomínios baseada em Asterisk, atuando no controle de chamadas, na interface web e no sistema embarcado (Golang, C, Lua, React, firmware em OpenWrt) — produto bem-sucedido e amplamente elogiado por clientes acostumados a soluções tradicionais de PABX.",
+          "Corrigi e evoluí o software de telefones SIP em produção, contribuindo para a redução de problemas reportados em campo e para a melhoria dos índices de satisfação no pós-venda.",
+          "Mantive um softphone SIP em Java para Android, adaptando-o a novas versões do sistema operacional e aos requisitos da Google Play, garantindo a permanência do app na loja e a continuidade de uso pelos clientes.",
+          "Colaborei diretamente com as equipes de QA, pós-vendas e clientes em testes de campo, validando o funcionamento dos produtos e priorizando correções com base em feedback real de uso."
+        ]
       },
       {
         "company": "Intelbras",
         "position": "Estagiário de Desenvolvimento de Software",
         "period": "Abril de 2024 - Março de 2025",
-        "description": "Desenvolvimento de API REST para gestão de condomínios; aplicação em Golang para controle de chamadas via Asterisk ARI; implementações e correções em produtos de telefonia IP com Linux embarcado; e manutenção de softphone Android em Java. Tecnologias: C, Lua, AngularJS, Java, Go, Python, Linux embarcado."
+        "highlights": []
       },
       {
         "company": "RNP - Rede Nacional de Ensino e Pesquisa",
         "position": "Desenvolvedor | Bolsista",
         "period": "Julho de 2023 - Dezembro de 2023",
-        "description": "Projeto de pesquisa do PGID/RNP para integração de passkeys como fator de autenticação em um provedor de identidade Shibboleth. Estudo de SSO, SAML, FIDO e WebAuthn; alterações no schema PostgreSQL; novos endpoints em Java/Spring Boot e telas com Thymeleaf. Publicação e apresentação no XXIII Simpósio Brasileiro de Segurança da Informação."
+        "highlights": [
+          "Participei do projeto de pesquisa do PGID/RNP para integração de passkeys como fator de autenticação em um provedor de identidade Shibboleth.",
+          "O estudo desenvolvido serviu de base para a implementação de autenticação por passkeys na CAFe (Comunidade Acadêmica Federada e Educacional).",
+          "Publiquei e apresentei os resultados no XXIII Simpósio Brasileiro de Segurança da Informação e de Sistemas Computacionais."
+        ]
       }
     ]
   },
@@ -65,6 +75,7 @@
     "name": "Andrey Adriano da Rosa",
     "role": "Fullstack Developer | VoIP & Embedded Linux",
     "email": "andrey.adriano01@hotmail.com",
+    "linkedin": "linkedin.com/in/andrey-adriano-da-rosa",
     "summary": "Telecommunications Engineer and software developer with 3 years of experience, dedicated to constantly growing and delivering more. My professional experience covers building VoIP solutions and full-stack applications for IP telephony products such as phones, PBXs, and softphones — working across everything from embedded Linux to web development, with a range of languages and frameworks.",
     "skills": [
       "Go",
@@ -107,19 +118,28 @@
         "company": "Intelbras",
         "position": "Fullstack Developer | VoIP | Embedded Linux",
         "period": "March 2025 - Present",
-        "description": "Working in the Corporate Communication R&D team, focused on VoIP and telephony products (phones and PBXs), from requirements gathering to launch. Built a condominium communication hub based on Asterisk (Golang, C, Lua, React, firmware on OpenWrt); maintained PJSIP-based SIP phones (C, Lua, AngularJS, Yocto/Bitbake firmware); and maintained an Android softphone in Java, alongside QA, post-sales, and customer field-testing support."
+        "highlights": [
+          "As part of the Corporate Communication R&D team, contributed to the full development of a condominium communication hub based on Asterisk, working across call control, the web interface, and the embedded system (Golang, C, Lua, React, firmware on OpenWrt) — a successful product, widely praised by customers used to traditional PABX solutions.",
+          "Fixed and evolved production SIP phone software, contributing to fewer field-reported issues and improved post-sales satisfaction metrics.",
+          "Maintained a Java-based SIP softphone for Android, adapting it to new OS versions and Google Play requirements to keep the app published and usable for customers.",
+          "Worked directly with QA, post-sales, and customers during field testing, validating functionality and prioritizing fixes based on real usage feedback."
+        ]
       },
       {
         "company": "Intelbras",
         "position": "Software Development Intern",
         "period": "April 2024 - March 2025",
-        "description": "Built a REST API for condominium management; a Golang application to control calls via the Asterisk ARI interface; implementations and fixes for embedded-Linux IP telephony products; and maintenance of an Android softphone in Java. Technologies: C, Lua, AngularJS, Java, Go, Python, embedded Linux."
+        "highlights": []
       },
       {
         "company": "RNP - Brazilian National Research and Education Network",
         "position": "Developer | Research Fellow",
         "period": "July 2023 - December 2023",
-        "description": "RNP's PGID research project integrating passkeys as an authentication factor into a Shibboleth identity provider. Studied SSO, SAML, FIDO, and WebAuthn; modified the PostgreSQL schema; built new endpoints in Java/Spring Boot and screens with Thymeleaf. Published and presented at the XXIII Brazilian Symposium on Information Security."
+        "highlights": [
+          "Contributed to RNP's PGID research project integrating passkeys as an authentication factor into a Shibboleth identity provider.",
+          "The study became the foundation for implementing passkey authentication in CAFe (Brazil's federated academic and research identity community).",
+          "Published and presented results at the XXIII Brazilian Symposium on Information Security."
+        ]
       }
     ]
   }
