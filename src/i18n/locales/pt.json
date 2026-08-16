@@ -26,7 +26,41 @@
       "subtitle": "Desenvolvedor de software | Linux Embarcado & VoIP",
       "ctaProjects": "Ver projetos",
       "ctaBlog": "Ler blog",
-      "ctaResume": "Baixar currículo (PDF)"
+      "ctaResume": "Baixar currículo (PDF)",
+      "terminal": {
+        "prompt": "visitante@andrey:~$",
+        "command": "whoami",
+        "boot": [
+          "iniciando website...",
+          "montando /pt ... OK",
+          "carregando módulos: next, react, tailwind ... OK",
+          "verificando sinal ... OK"
+        ],
+        "labels": {
+          "name": "nome",
+          "role": "cargo",
+          "focus": "foco",
+          "experience": "exp",
+          "stack": "stack",
+          "location": "local",
+          "status": "status"
+        },
+        "help": [
+          { "cmd": "ls", "desc": "lista as páginas disponíveis" },
+          {
+            "cmd": "cd <página>",
+            "desc": "entra em uma página (ex.: cd projects, cd /)"
+          },
+          { "cmd": "whoami", "desc": "mostra minhas informações" },
+          { "cmd": "clear", "desc": "limpa o terminal" },
+          { "cmd": "reboot", "desc": "recarrega a página" },
+          { "cmd": "help", "desc": "lista os comandos disponíveis" }
+        ],
+        "focus": "Linux Embarcado & VoIP",
+        "experience": "3+ anos",
+        "stack": "Go · React · C · Lua · Asterisk",
+        "location": "Santa Catarina, Brasil"
+      }
     },
     "about": {
       "label": "Sobre mim",

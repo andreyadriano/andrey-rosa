@@ -26,7 +26,41 @@
       "subtitle": "Software developer | Embedded Linux & VoIP",
       "ctaProjects": "View projects",
       "ctaBlog": "Read blog",
-      "ctaResume": "Download resume (PDF)"
+      "ctaResume": "Download resume (PDF)",
+      "terminal": {
+        "prompt": "visitor@andrey:~$",
+        "command": "whoami",
+        "boot": [
+          "booting website...",
+          "mounting /en ... OK",
+          "loading modules: next, react, tailwind ... OK",
+          "checking signal ... OK"
+        ],
+        "labels": {
+          "name": "name",
+          "role": "role",
+          "focus": "focus",
+          "experience": "exp",
+          "stack": "stack",
+          "location": "location",
+          "status": "status"
+        },
+        "help": [
+          { "cmd": "ls", "desc": "list available pages" },
+          {
+            "cmd": "cd <page>",
+            "desc": "go to a page (e.g. cd projects, cd /)"
+          },
+          { "cmd": "whoami", "desc": "show my info" },
+          { "cmd": "clear", "desc": "clear the terminal" },
+          { "cmd": "reboot", "desc": "reload the page" },
+          { "cmd": "help", "desc": "list available commands" }
+        ],
+        "focus": "Embedded Linux & VoIP",
+        "experience": "3+ years",
+        "stack": "Go · React · C · Lua · Asterisk",
+        "location": "Santa Catarina, Brazil"
+      }
     },
     "about": {
       "label": "About me",

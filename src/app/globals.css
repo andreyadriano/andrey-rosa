@@ -34,13 +34,29 @@
   --fg-muted: #85908a;
   --fg-subtle: #c5cac5;
 
-  /* Acentos de marca */
-  --accent: #67b667; /* verde — CTAs primárias, destaques */
+  /* Acentos de marca
+   * --accent: identidade e chrome estrutural — nome/cargo, CTAs primárias,
+   *   navegação ativa/hover, controles (toggle de tema, indicador de status).
+   * --accent-2: conteúdo dinâmico — tags de skill, links "ver mais"/posts,
+   *   dados de contato. Regra: se é sobre "quem eu sou" ou uma ação
+   *   principal, --accent; se aponta pra mais conteúdo, --accent-2. */
+  --accent: #67b667;
   --accent-hover: #7ec97e;
   --accent-fg: #050605; /* texto sobre fundo --accent */
-  --accent-2: #8fae9c; /* verde-cinza neutro — sinal secundário, links */
+  --accent-2: #8fae9c;
   --accent-2-hover: #a9c7b6;
   --accent-2-fg: #050605;
+
+  /* --warn: aviso/atenção (ícone sol/lua do ThemeToggle, minimizar do
+   * TerminalWindow). --danger: ação destrutiva (fechar do TerminalWindow).
+   * Tokens isolados em vez de amber-400/500, red-500 etc. do Tailwind pra
+   * não hardcodar cor fora do sistema de tokens. */
+  --warn: #f5c451;
+  --warn-hover: #f8d478;
+  --warn-fg: #050605;
+  --danger: #e5484d;
+  --danger-hover: #f16d71;
+  --danger-fg: #ffffff;
 
   --font-sans: var(--font-plex-sans);
   --font-mono: var(--font-plex-mono);
@@ -67,6 +83,13 @@
   --accent-2: #5b6b60;
   --accent-2-hover: #46564b;
   --accent-2-fg: #ffffff;
+
+  --warn: #b8860b;
+  --warn-hover: #a07709;
+  --warn-fg: #ffffff;
+  --danger: #cc3934;
+  --danger-hover: #b62f2b;
+  --danger-fg: #ffffff;
 }
 
 @theme inline {
@@ -88,6 +111,12 @@
   --color-accent-2: var(--accent-2);
   --color-accent-2-hover: var(--accent-2-hover);
   --color-accent-2-fg: var(--accent-2-fg);
+  --color-warn: var(--warn);
+  --color-warn-hover: var(--warn-hover);
+  --color-warn-fg: var(--warn-fg);
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+  --color-danger-fg: var(--danger-fg);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
@@ -106,4 +135,11 @@ body {
   50% {
     transform: scaleY(1);
   }
+}
+
+/* <a> já vira "pointer" nativamente no navegador; <button> não (o padrão
+ * do browser é "default"), então precisa disso pra parecer clicável.
+ * Cursor do sistema, sem imagem customizada. */
+button {
+  cursor: pointer;
 }

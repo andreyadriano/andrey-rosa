@@ -8,11 +8,12 @@
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { isValidLocale, locales } from "@/i18n/config";
+import { getDictionary, isValidLocale, locales } from "@/i18n/config";
 import { LangAlternateProvider } from "@/components/LangAlternateContext";
 import { LangSync } from "@/components/LangSync";
 import { TopBar } from "@/components/TopBar";
 import { Footer } from "@/components/Footer";
+import { TerminalWindow } from "@/components/TerminalWindow";
 import resumeData from "@/data/resume.json";
 import type { Lang, ResumeData } from "@/types";
 
@@ -33,12 +34,50 @@ export default async function LangLayout({
     notFound();
   }
 
+  const dict = await getDictionary(lang);
+  const terminal = dict.home.hero.terminal;
+  const terminalRows = [
+    { label: terminal.labels.name, value: "Andrey Adriano da Rosa" },
+    { label: terminal.labels.role, value: dict.home.hero.subtitle },
+    { label: terminal.labels.focus, value: terminal.focus },
+    { label: terminal.labels.experience, value: terminal.experience },
+    { label: terminal.labels.stack, value: terminal.stack },
+    { label: terminal.labels.location, value: terminal.location },
+    {
+      label: terminal.labels.status,
+      value: (
+        <span className="inline-flex items-center gap-1.5 text-accent">
+          <span
+            className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse"
+            aria-hidden="true"
+          />
+          {dict.home.hero.availability}
+        </span>
+      ),
+    },
+  ];
+  const terminalPages = [
+    { slug: "home", label: dict.nav.home },
+    { slug: "projects", label: dict.nav.projects },
+    { slug: "blog", label: dict.nav.blog },
+    { slug: "resume", label: dict.nav.resume },
+  ];
+
   return (
     <LangAlternateProvider>
       <LangSync lang={lang} />
       <TopBar lang={lang} />
       {children}
       <Footer lang={lang} />
+      <TerminalWindow
+        lang={lang}
+        prompt={terminal.prompt}
+        bootCommand={terminal.command}
+        bootLines={terminal.boot}
+        rows={terminalRows}
+        pages={terminalPages}
+        help={terminal.help}
+      />
     </LangAlternateProvider>
   );
 }

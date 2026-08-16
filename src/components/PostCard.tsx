@@ -14,7 +14,7 @@ export function PostCard({ post, lang }: { post: Post; lang: Lang }) {
   return (
     <Link
       href={`/${lang}/blog/${post.slug}`}
-      className="group rounded-lg border border-border bg-surface p-5 hover:border-accent-2/40 hover:bg-surface-hover transition-colors"
+      className="group block rounded-lg border border-border bg-surface p-5 hover:border-accent-2/40 hover:bg-surface-hover transition-colors"
     >
       <div className="flex items-center gap-2 font-mono text-[0.6875rem] text-fg-muted">
         <time>

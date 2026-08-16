@@ -15,6 +15,7 @@ import Link from "next/link";
 import { Download } from "lucide-react";
 import { SectionLabel } from "@/components/SectionLabel";
 import { SignalDivider } from "@/components/SignalDivider";
+import { Reveal } from "@/components/Reveal";
 import { ProjectCard } from "@/components/ProjectCard";
 import { PostCard } from "@/components/PostCard";
 import { socials } from "@/components/socials";
@@ -46,7 +47,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <section className="border-b border-border">
         <div className="max-w-6xl mx-auto px-6 py-24 md:py-40 min-h-[80vh] flex flex-col md:grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 md:items-center">
           <div>
-            <h1 className="font-mono text-[clamp(1.375rem,5vw+0.5rem,3.75rem)] font-medium leading-[1.05] tracking-tight text-accent whitespace-nowrap text-center md:text-left">
+            <h1 className="font-mono text-[clamp(1.375rem,5vw+0.5rem,3.75rem)] font-medium leading-[1.05] tracking-tight text-accent md:whitespace-nowrap text-center md:text-left">
               Andrey Adriano da Rosa
             </h1>
 
@@ -113,20 +114,26 @@ export default async function HomePage({ params }: HomePageProps) {
 
       {/* SOBRE MIM */}
       <section className="max-w-6xl mx-auto px-6 py-20">
-        <SectionLabel>{dict.home.about.label}</SectionLabel>
-        <div className="max-w-2xl space-y-4 text-lg text-fg-subtle leading-relaxed">
-          {dict.home.about.text.split("\n\n").map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </div>
+        <Reveal>
+          <SectionLabel>{dict.home.about.label}</SectionLabel>
+          <div className="max-w-2xl space-y-4 text-lg text-fg-subtle leading-relaxed">
+            {dict.home.about.text.split("\n\n").map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </Reveal>
       </section>
 
       {/* PROJETOS EM DESTAQUE */}
       <section className="max-w-6xl mx-auto px-6 py-20 border-t border-border">
-        <SectionLabel>{dict.home.projects.label}</SectionLabel>
+        <Reveal>
+          <SectionLabel>{dict.home.projects.label}</SectionLabel>
+        </Reveal>
         <div className="grid md:grid-cols-3 gap-5">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+          {projects.map((project, i) => (
+            <Reveal key={project.title} delayMs={i * 80}>
+              <ProjectCard project={project} />
+            </Reveal>
           ))}
         </div>
         <Link
@@ -139,10 +146,14 @@ export default async function HomePage({ params }: HomePageProps) {
 
       {/* ÚLTIMOS POSTS */}
       <section className="max-w-6xl mx-auto px-6 py-20 border-t border-border">
-        <SectionLabel>{dict.home.blog.label}</SectionLabel>
+        <Reveal>
+          <SectionLabel>{dict.home.blog.label}</SectionLabel>
+        </Reveal>
         <div className="flex flex-col gap-5">
-          {posts.map((post) => (
-            <PostCard key={post.slug} post={post} lang={lang} />
+          {posts.map((post, i) => (
+            <Reveal key={post.slug} delayMs={i * 80}>
+              <PostCard post={post} lang={lang} />
+            </Reveal>
           ))}
         </div>
         <Link

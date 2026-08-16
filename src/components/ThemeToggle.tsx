@@ -52,13 +52,13 @@ export function ThemeToggle() {
         }`}
       >
         {isLight ? (
-          <Sun size={12} strokeWidth={2} className="text-amber-500" />
+          <Sun size={12} strokeWidth={2} className="text-warn" />
         ) : (
           <Moon
             size={12}
             strokeWidth={2}
             fill="currentColor"
-            className="text-amber-400"
+            className="text-warn"
           />
         )}
       </span>
