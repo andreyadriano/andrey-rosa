@@ -18,7 +18,7 @@ export const projectsByLang: ProjectsData = {
       links: [
         {
           label: "Veja mais",
-          href: "https://wiki.sj.ifsc.edu.br/index.php/Reconhecimento_por_Imagem_de_Lances_de_Xadrez_com_Vis%C3%A3o_Computacional_e_Redes_Neurais_Convolucionais",
+          href: "https://repositorio.ifsc.edu.br/items/d712b8d1-ca05-4d8d-9b90-525590595922",
           variant: "primary",
           icon: "external",
         },
@@ -80,7 +80,7 @@ export const projectsByLang: ProjectsData = {
       links: [
         {
           label: "Read more",
-          href: "https://wiki.sj.ifsc.edu.br/index.php/Reconhecimento_por_Imagem_de_Lances_de_Xadrez_com_Vis%C3%A3o_Computacional_e_Redes_Neurais_Convolucionais",
+          href: "https://repositorio.ifsc.edu.br/items/d712b8d1-ca05-4d8d-9b90-525590595922",
           variant: "primary",
           icon: "external",
         },
