@@ -1,26 +1,109 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------------
+ * Design tokens
+ *
+ * Paleta única em variáveis CSS "cruas" (--bg, --fg, --accent...). O bloco
+ * @theme inline abaixo expõe cada uma como utilitário Tailwind (bg-bg,
+ * text-fg, border-border, text-accent...) — nenhuma cor deve ser escrita
+ * como hex/rgb ou classe de paleta padrão (amber-400, white/10 etc.)
+ * diretamente em componentes; sempre via esses tokens semânticos.
+ *
+ * Tema: dark é o padrão fixo (identidade visual "terminal"), independente
+ * da preferência do SO — não usamos prefers-color-scheme aqui de propósito.
+ * :root[data-theme="light"] já define o par claro, pronto para um futuro
+ * seletor de tema (ex.: <html data-theme="light">) sem tocar em nenhum
+ * componente.
+ * ------------------------------------------------------------------------- */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+
+  /* Superfícies */
+  --bg: #050605;
+  --bg-elevated: #0e0f0e;
+  --surface: rgba(255, 255, 255, 0.02);
+  --surface-hover: rgba(255, 255, 255, 0.04);
+
+  /* Bordas */
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.3);
+
+  /* Texto */
+  --fg: #e6e9e6;
+  --fg-muted: #85908a;
+  --fg-subtle: #c5cac5;
+
+  /* Acentos de marca */
+  --accent: #67b667; /* verde — CTAs primárias, destaques */
+  --accent-hover: #7ec97e;
+  --accent-fg: #050605; /* texto sobre fundo --accent */
+  --accent-2: #8fae9c; /* verde-cinza neutro — sinal secundário, links */
+  --accent-2-hover: #a9c7b6;
+  --accent-2-fg: #050605;
+
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --bg-elevated: #f2f4f2;
+  --surface: rgba(10, 12, 10, 0.03);
+  --surface-hover: rgba(10, 12, 10, 0.06);
+
+  --border: rgba(10, 12, 10, 0.1);
+  --border-strong: rgba(10, 12, 10, 0.3);
+
+  --fg: #141815;
+  --fg-muted: #5b655d;
+  --fg-subtle: #333a34;
+
+  --accent: #3f8f52;
+  --accent-hover: #34793f;
+  --accent-fg: #ffffff;
+  --accent-2: #5b6b60;
+  --accent-2-hover: #46564b;
+  --accent-2-fg: #ffffff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-2: var(--accent-2);
+  --color-accent-2-hover: var(--accent-2-hover);
+  --color-accent-2-fg: var(--accent-2-fg);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+@keyframes signal-bounce {
+  0%,
+  100% {
+    transform: scaleY(0.45);
+  }
+  50% {
+    transform: scaleY(1);
+  }
 }

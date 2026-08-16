@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "home": "Início",
+    "projects": "Projetos",
+    "blog": "Blog",
+    "resume": "Currículo"
+  },
+  "resume": {
+    "download": "Baixar Currículo (PDF)"
+  },
+  "resumePage": {
+    "title": "Currículo",
+    "subtitle": "Resumo da minha formação, experiência e stack técnica. O PDF abaixo é gerado a partir do mesmo conteúdo desta página.",
+    "downloadCta": "Baixar PDF",
+    "sections": {
+      "experience": "Experiência",
+      "education": "Formação",
+      "skills": "Habilidades",
+      "languages": "Idiomas"
+    }
+  },
+  "home": {
+    "hero": {
+      "availability": "Disponível para novas oportunidades",
+      "greeting": "Olá, eu sou",
+      "subtitle": "Desenvolvedor de software | Linux Embarcado & VoIP",
+      "ctaProjects": "Ver projetos",
+      "ctaBlog": "Ler blog",
+      "ctaResume": "Baixar currículo (PDF)"
+    },
+    "about": {
+      "label": "Sobre mim",
+      "text": "Sou engenheiro de Telecomunicações formado pelo IFSC e atuo há cerca de 2 anos como desenvolvedor de software na Intelbras. No dia a dia, construo aplicações para produtos de telefonia IP — telefones e PABXs — trabalhando principalmente com Go, React, C e Lua, além de lidar com Linux embarcado baseado em OpenWrt e Yocto Project.\n\nMinha formação dupla em telecomunicações, como técnico e engenheiro, me deu uma base sólida em redes, protocolos de comunicação e sistemas embarcados — conhecimento que aplico diretamente no desenvolvimento de software para produtos de VoIP."
+    },
+    "projects": {
+      "label": "Projetos em destaque",
+      "viewAll": "Ver todos os projetos"
+    },
+    "blog": {
+      "label": "Últimos posts",
+      "viewAll": "Ver todos os posts"
+    },
+    "contact": {
+      "label": "Contato"
+    }
+  },
+  "projectsPage": {
+    "title": "Projetos",
+    "subtitle": "Uma seleção de projetos que venho construindo, de firmwares embarcados a aplicações web."
+  },
+  "blogPage": {
+    "title": "Blog",
+    "subtitle": "Anotações e aprendizados sobre desenvolvimento de software, Linux embarcado e VoIP.",
+    "back": "← Voltar ao blog"
+  },
+  "footer": {
+    "contact": "Entre em contato comigo pelo"
+  }
+}

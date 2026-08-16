@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "blog": "Blog",
+    "resume": "Resume"
+  },
+  "resume": {
+    "download": "Download Resume (PDF)"
+  },
+  "resumePage": {
+    "title": "Resume",
+    "subtitle": "A summary of my education, experience, and technical stack. The PDF below is generated from this same content.",
+    "downloadCta": "Download PDF",
+    "sections": {
+      "experience": "Experience",
+      "education": "Education",
+      "skills": "Skills",
+      "languages": "Languages"
+    }
+  },
+  "home": {
+    "hero": {
+      "availability": "Open to new opportunities",
+      "greeting": "Hi, I'm",
+      "subtitle": "Software developer | Embedded Linux & VoIP",
+      "ctaProjects": "View projects",
+      "ctaBlog": "Read blog",
+      "ctaResume": "Download resume (PDF)"
+    },
+    "about": {
+      "label": "About me",
+      "text": "I'm a Telecommunications Engineer (IFSC) and have spent the last ~2 years as a software developer at Intelbras. Day to day, I build applications for IP telephony products — phones and PABXs — mainly working with Go, React, C, and Lua, alongside embedded Linux based on OpenWrt and the Yocto Project.\n\nMy background spans both a technician and an engineering degree in telecommunications, giving me a solid foundation in networking, communication protocols, and embedded systems — knowledge I apply directly to building VoIP software."
+    },
+    "projects": {
+      "label": "Featured projects",
+      "viewAll": "View all projects"
+    },
+    "blog": {
+      "label": "Latest posts",
+      "viewAll": "View all posts"
+    },
+    "contact": {
+      "label": "Contact"
+    }
+  },
+  "projectsPage": {
+    "title": "Projects",
+    "subtitle": "A selection of projects I've been building, from embedded firmware to web applications."
+  },
+  "blogPage": {
+    "title": "Blog",
+    "subtitle": "Notes and things I've learned about software development, embedded Linux, and VoIP.",
+    "back": "← Back to blog"
+  },
+  "footer": {
+    "contact": "Get in touch with me at"
+  }
+}

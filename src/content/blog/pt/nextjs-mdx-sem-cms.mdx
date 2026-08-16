@@ -1,0 +1,39 @@
+export const metadata = {
+  title: "Next.js + MDX: montando um blog sem CMS",
+  summary:
+    "Como estruturei o conteúdo do blog em Markdown, sem depender de banco de dados ou CMS.",
+  date: "2026-08-15",
+  translations: { en: "nextjs-mdx-no-cms" },
+};
+
+Este post é, ao mesmo tempo, o anúncio e o teste da própria funcionalidade que ele descreve: o pipeline de conteúdo do blog. Nada de CMS, nada de banco de dados — cada post é um arquivo `.mdx` versionado junto com o resto do código.
+
+## Como funciona
+
+Cada post vive em `src/content/blog/{lang}/{slug}.mdx`, com os **metadados** (título, resumo, data) exportados no topo do arquivo como um objeto JavaScript:
+
+```md
+export const metadata = {
+  title: "Meu post",
+  summary: "Um resumo curto",
+  date: "2026-08-15",
+};
+
+Conteúdo em Markdown normal aqui.
+```
+
+Na listagem (`/blog`), eu leio os slugs disponíveis com `fs.readdirSync` e importo cada `.mdx` para ler seu `metadata` exportado. Já na página do post (`/blog/[slug]`), o mesmo import dinâmico também me dá o componente React compilado — um único import resolve conteúdo e metadados juntos.
+
+## Por que assim
+
+- **Sem CMS**: editar um post é editar um arquivo, com `git diff` e histórico de verdade.
+- **Sem banco de dados**: o site continua simples de hospedar — o conteúdo é só mais um arquivo no repositório.
+- **Markdown de verdade**: listas, links, `código inline`, blocos de código e citações funcionam sem gambiarra.
+
+O visual de cada elemento (títulos, links, blocos de código) vem de `src/mdx-components.tsx`, que mapeia as tags HTML do Markdown pros tokens de cor e tipografia do resto do site — então um post do blog não destoa visualmente do resto da página.
+
+> Se você está lendo isso renderizado com a cor certa, os links funcionando e o bloco de código acima com destaque de fundo, a integração passou no teste.
+
+---
+
+**Nota:** este post foi gerado por IA como conteúdo de exemplo, só para testar o pipeline de Markdown/MDX do blog — não é um texto escrito por mim.

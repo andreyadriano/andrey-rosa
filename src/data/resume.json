@@ -1,0 +1,126 @@
+{
+  "pt": {
+    "name": "Andrey Adriano da Rosa",
+    "role": "Desenvolvedor Fullstack | VoIP & Linux Embarcado",
+    "email": "andrey.adriano01@hotmail.com",
+    "summary": "Engenheiro de Telecomunicações e desenvolvedor de software com 3 anos de experiência, dedicado a evoluir e entregar cada vez mais. Minha experiência profissional envolve o desenvolvimento de soluções VoIP e aplicações fullstack para produtos de telefonia IP, como telefones, centrais telefônicas e softphones — atuando desde o Linux embarcado até o desenvolvimento web, com diversas linguagens e frameworks.",
+    "skills": [
+      "Go",
+      "Gin",
+      "React",
+      "JavaScript",
+      "AngularJS",
+      "Bootstrap",
+      "C",
+      "Python",
+      "Lua",
+      "Java (Android)",
+      "SIP 2.0",
+      "Asterisk",
+      "PJSIP",
+      "ARI",
+      "VoIP",
+      "Linux Embarcado",
+      "OpenWrt",
+      "Yocto Project",
+      "Docker",
+      "SQL / PostgreSQL",
+      "Redes de Computadores"
+    ],
+    "languages": ["Português (nativo)", "Inglês (avançado)"],
+    "education": [
+      {
+        "institution": "IFSC - Instituto Federal de Santa Catarina",
+        "degree": "Bacharelado, Engenharia de Telecomunicações",
+        "period": "Janeiro de 2020 - Março de 2025"
+      },
+      {
+        "institution": "IFSC - Instituto Federal de Santa Catarina",
+        "degree": "Curso Técnico Integrado, Técnico em Telecomunicações",
+        "period": "2016 - 2019"
+      }
+    ],
+    "experience": [
+      {
+        "company": "Intelbras",
+        "position": "Desenvolvedor Fullstack | VoIP | Linux Embarcado",
+        "period": "Março de 2025 - Presente",
+        "description": "Atuo no P&D de Comunicação Corporativa com foco em VoIP e produtos de telefonia (telefones e centrais telefônicas), do levantamento de requisitos ao lançamento. Desenvolvimento de central de comunicação baseada em Asterisk (Golang, C, Lua, React, firmware em OpenWrt); manutenção de telefones SIP baseados em PJSIP (C, Lua, AngularJS, firmware Yocto/Bitbake); e de softphone Android em Java, além de atuação com QA, pós-vendas e clientes em testes de campo."
+      },
+      {
+        "company": "Intelbras",
+        "position": "Estagiário de Desenvolvimento de Software",
+        "period": "Abril de 2024 - Março de 2025",
+        "description": "Desenvolvimento de API REST para gestão de condomínios; aplicação em Golang para controle de chamadas via Asterisk ARI; implementações e correções em produtos de telefonia IP com Linux embarcado; e manutenção de softphone Android em Java. Tecnologias: C, Lua, AngularJS, Java, Go, Python, Linux embarcado."
+      },
+      {
+        "company": "RNP - Rede Nacional de Ensino e Pesquisa",
+        "position": "Desenvolvedor | Bolsista",
+        "period": "Julho de 2023 - Dezembro de 2023",
+        "description": "Projeto de pesquisa do PGID/RNP para integração de passkeys como fator de autenticação em um provedor de identidade Shibboleth. Estudo de SSO, SAML, FIDO e WebAuthn; alterações no schema PostgreSQL; novos endpoints em Java/Spring Boot e telas com Thymeleaf. Publicação e apresentação no XXIII Simpósio Brasileiro de Segurança da Informação."
+      }
+    ]
+  },
+  "en": {
+    "name": "Andrey Adriano da Rosa",
+    "role": "Fullstack Developer | VoIP & Embedded Linux",
+    "email": "andrey.adriano01@hotmail.com",
+    "summary": "Telecommunications Engineer and software developer with 3 years of experience, dedicated to constantly growing and delivering more. My professional experience covers building VoIP solutions and full-stack applications for IP telephony products such as phones, PBXs, and softphones — working across everything from embedded Linux to web development, with a range of languages and frameworks.",
+    "skills": [
+      "Go",
+      "Gin",
+      "React",
+      "JavaScript",
+      "AngularJS",
+      "Bootstrap",
+      "C",
+      "Python",
+      "Lua",
+      "Java (Android)",
+      "SIP 2.0",
+      "Asterisk",
+      "PJSIP",
+      "ARI",
+      "VoIP",
+      "Embedded Linux",
+      "OpenWrt",
+      "Yocto Project",
+      "Docker",
+      "SQL / PostgreSQL",
+      "Computer Networking"
+    ],
+    "languages": ["Portuguese (native)", "English (advanced)"],
+    "education": [
+      {
+        "institution": "IFSC - Federal Institute of Santa Catarina",
+        "degree": "B.Eng., Telecommunications Engineering",
+        "period": "January 2020 - March 2025"
+      },
+      {
+        "institution": "IFSC - Federal Institute of Santa Catarina",
+        "degree": "Integrated Technical Course, Telecommunications Technician",
+        "period": "2016 - 2019"
+      }
+    ],
+    "experience": [
+      {
+        "company": "Intelbras",
+        "position": "Fullstack Developer | VoIP | Embedded Linux",
+        "period": "March 2025 - Present",
+        "description": "Working in the Corporate Communication R&D team, focused on VoIP and telephony products (phones and PBXs), from requirements gathering to launch. Built a condominium communication hub based on Asterisk (Golang, C, Lua, React, firmware on OpenWrt); maintained PJSIP-based SIP phones (C, Lua, AngularJS, Yocto/Bitbake firmware); and maintained an Android softphone in Java, alongside QA, post-sales, and customer field-testing support."
+      },
+      {
+        "company": "Intelbras",
+        "position": "Software Development Intern",
+        "period": "April 2024 - March 2025",
+        "description": "Built a REST API for condominium management; a Golang application to control calls via the Asterisk ARI interface; implementations and fixes for embedded-Linux IP telephony products; and maintenance of an Android softphone in Java. Technologies: C, Lua, AngularJS, Java, Go, Python, embedded Linux."
+      },
+      {
+        "company": "RNP - Brazilian National Research and Education Network",
+        "position": "Developer | Research Fellow",
+        "period": "July 2023 - December 2023",
+        "description": "RNP's PGID research project integrating passkeys as an authentication factor into a Shibboleth identity provider. Studied SSO, SAML, FIDO, and WebAuthn; modified the PostgreSQL schema; built new endpoints in Java/Spring Boot and screens with Thymeleaf. Published and presented at the XXIII Brazilian Symposium on Information Security."
+      }
+    ]
+  }
+}
