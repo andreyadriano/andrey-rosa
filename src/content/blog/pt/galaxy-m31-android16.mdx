@@ -1,0 +1,93 @@
+export const metadata = {
+  title: "Atualizando um Galaxy velho para o Android 16",
+  summary:
+    "Como eu peguei um celular que parou no tempo no Android 12, sem atualizações da fabricante, e o atualizei para o Android 16.",
+  date: "2026-08-16",
+  translations: { en: "galaxy-m31-android16" },
+};
+
+Na metade desse ano de 2026, troquei o meu bom e velho Samsung Galaxy M31, que comprei em 2020, por um Xiaomi Poco X8
+Pro. Ele ficou parado na gaveta enquanto eu ficava pensando em algo para fazer com ele. O celular estava parado no
+tempo, preso no Android 12 há pelo menos uns 3 anos e já sem qualquer suporte de atualizações de segurança pela Samsung.
+
+Eu já conhecia o projeto crDroid através de um amigo do trabalho. O crDroid é uma custom ROM open-source do Android que
+é baseada no Lineage OS e é mantida pela comunidade. Essa ROM é altamente personalizável e livre de bloatwares da Google
+ou da fabricante, que costumam deixar o celular lento.
+
+Recentemente eu havia feito root nesse meu mesmo celular e estávamos discutindo sobre as dificuldades que isso gera, por
+conta dos bloqueios de apps de banco e do gov.br, quando o assunto do crDroid surgiu de novo e decidi checar no site
+para ver se havia suporte para o meu Galaxy M31. E não é que uma nova versão havia sido lançada há pouco tempo?
+
+Chegando em casa eu decidi testar para ver como funciona. Baixei a ROM do site oficial para o modelo do meu celular,
+baixei o MindTheGapps (recomendado pelo mantenedor da ROM para o Galaxy M31), um pacote que instala os aplicativos e
+serviços da Google em custom ROMs do Android, uma vez que a Google não dá suporte a esses sistemas.
+
+Conectei o celular ao meu PC e utilizei o Odin, um software criado pela Samsung, para fazer a flash do modo recovery
+custom. Depois coloquei novamente o dispositivo em modo flash e via adb enviei a ROM do crDroid e o pacote do
+MindTheGapps. Em pouco tempo meu celular pulou do Android 12 para o Android 16, ganhando recursos que originalmente ele
+não tinha, como o desbloqueio por reconhecimento facial.
+
+Ainda não tive tempo de testar muito a fundo, mas além do reconhecimento facial, o sistema também ganhou um novo menu
+nas configurações, a crDroid settings, que permite personalizar muito o Android e sua interface, desde a barra de
+status, onde ficam os ícones de wi-fi e bateria, até adicionar atalhos de botão e gestos especiais.
+
+Agora estou testando aplicativos open-source que, em combinação com o Shizuku e Dhizuku, permitem novas possibilidades
+expondo permissões privilegiadas que normalmente o sistema Android bloqueia, como congelamento ou desativação de apps de
+sistema, personalização da interface sem root e automações.
+
+## Vantagens e Desvantagens do crDroid
+
+Para quem está pensando em fazer o mesmo processo, vale colocar na balança o que se ganha e o que se perde:
+
+### Vantagens
+
+- **Desempenho e Fluidez:** O sistema fica extremamente leve, sem os engasgos da One UI antiga e sem bloatwares de
+  fábrica rodando em segundo plano.
+- **Segurança Atualizada:** Atualizações com patches de segurança do Android 16 em um aparelho abandonado pela
+  fabricante.
+- **Novas Funções:** Recursos nativos do Android 16 (como o suporte a desbloqueio facial direto na ROM, privacidade
+  aprimorada e permissões granulares).
+- **Customização Total:** O painel _crDroid Settings_ permite alterar absolutamente tudo na interface sem precisar de
+  root.
+
+### Desvantagens
+
+- **Perda Definitiva do Knox:** A queima do e-Fuse desativa permanentemente recursos nativos como Samsung Pass, Pasta
+  Segura e Samsung Pay.
+- **Qualidade de Câmera Stock:** O app de câmera padrão do AOSP costuma ser mais simples que o da Samsung (o que pode
+  ser contornado instalando uma GCam).
+- **Play Integrity / Apps de Banco:** Sem ajustes adicionais (como módulos de ocultação), apps que exigem verificação
+  estrita de segurança (como bancos e Gov.br) podem recusar o funcionamento.
+
+## O processo de instalação do crDroid
+
+Para quem ficou curioso sobre os "bastidores" do que fiz, o caminho não teve mistério, mas exige um processo bem
+definido e com uma ordem correta:
+
+1. **Desbloqueio do bootloader:** Essa etapa é realizada no menu de opções do desenvolvedor, liberando o celular para
+   aceitar softwares não assinados pela Samsung. _Vale lembrar que fazer isso viola a garantia do produto._
+2. **Flash do modo recovery customizado via Odin:** basta colocar o aparelho em modo Download e enviar o arquivo
+   recovery.img e o vbmeta.img via Odin (ou heimdall-flash no Linux). No Galaxy M31, o modo Download é acessado com o
+   aparelho desligado, ao segurar ambos os botões de volume em seguida conectar o dispositivo via cabo ao computador.
+3. **Flash da ROM do crDroid e MindTheGapps:** Acessar o modo recovery (Vol. Up + botão Power com o celular conectado no
+   PC), resetar o padrão de fábrica e via `adb sideload` carregar o arquivo da ROM e do MindTheGapps, um de cada vez.
+
+Depois disso foi só reiniciar o celular, adicionar minha conta do Google, passar pelas configurações básicas do sistema
+e eu já estava brincando de personalizar toda a interface do meu celular.
+
+## Conclusão
+
+Ver um intermediário de 2020 rodando a versão mais recente do Android com tanta fluidez mostra o valor da comunidade
+open-source. O meu celular velhinho, que estava esquecido na gaveta, virou um dispositivo perfeito para testes,
+desenvolvimento e uso como celular reserva.
+
+Se você tem um aparelho encostado e suportado pelo crDroid, vale muito a pena tirar um fim de semana para experimentar!
+
+## Links úteis
+
+- [Página do crDroid para o Galaxy M31](https://crdroid.net/m31/12)
+- [Instruções de instalação](https://crdroid.net/m31/12/install)
+- [Como fazer root no Galaxy M31](https://magiskzip.com/how-to-root-samsung-galaxy-m31-using-magisk/): instruções de
+  como desbloquear o bootloader e usar o Odin.
+- [Lista de aplicativos open-source que fazem uso do Shizuku](https://github.com/timschneeb/awesome-shizuku)
+- [Outra lista de Shizuku Apps como alternativa ao root](https://github.com/krishna3163/shizuku-apps-root-alternative)

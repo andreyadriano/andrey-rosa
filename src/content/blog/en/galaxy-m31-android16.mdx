@@ -1,0 +1,91 @@
+export const metadata = {
+  title: "Updating an old Galaxy to Android 16",
+  summary:
+    "How I took a phone that was stuck in time on Android 12, with no updates from the manufacturer, and updated it to Android 16.",
+  date: "2026-08-16",
+  translations: { pt: "galaxy-m31-android16" },
+};
+
+Halfway through 2026, I swapped my good old Samsung Galaxy M31, which I bought in 2020, for a Xiaomi Poco X8 Pro. It sat
+in a drawer while I kept thinking about something to do with it. The phone was stuck in time, stuck on Android 12 for at
+least 3 years, with no security update support from Samsung whatsoever.
+
+I already knew about the crDroid project through a friend from work. crDroid is an open-source custom ROM for Android
+based on Lineage OS, maintained by the community. This ROM is highly customizable and free of bloatware from Google or
+the manufacturer, which tends to slow the phone down.
+
+I had recently rooted this same phone, and we were discussing the difficulties that causes, because of the blocks on
+banking apps and gov.br, when crDroid came up again and I decided to check the site to see if there was support for my
+Galaxy M31. And wouldn't you know it, a new version had just been released.
+
+Once I got home, I decided to try it out to see how it works. I downloaded the ROM from the official site for my phone
+model, and downloaded MindTheGapps (recommended by the ROM maintainer for the Galaxy M31), a package that installs
+Google's apps and services on custom Android ROMs, since Google doesn't officially support these systems.
+
+I connected the phone to my PC and used Odin, software created by Samsung, to flash the custom recovery mode. Then I put
+the device back into flash mode and used adb to send over the crDroid ROM and the MindTheGapps package. In no time my
+phone jumped from Android 12 to Android 16, gaining features it didn't originally have, like face unlock.
+
+I haven't had time to test it in much depth yet, but besides face unlock, the system also got a new settings menu,
+crDroid Settings, which lets you heavily customize Android and its interface, from the status bar, where the wi-fi and
+battery icons live, to adding button shortcuts and special gestures.
+
+I'm now testing open-source apps that, combined with Shizuku and Dhizuku, unlock new possibilities by exposing
+privileged permissions that Android normally blocks, like freezing or disabling system apps, customizing the interface
+without root, and automations.
+
+## crDroid: pros and cons
+
+For anyone thinking about doing the same, it's worth weighing what you gain and what you lose:
+
+### Pros
+
+- **Performance and smoothness:** the system becomes extremely light, with none of the stutters from the old One UI and
+  no factory bloatware running in the background.
+- **Up-to-date security:** Android 16 security patches on a phone abandoned by the manufacturer.
+- **New features:** native Android 16 features (like face unlock support built right into the ROM, improved privacy, and
+  granular permissions).
+- **Full customization:** the _crDroid Settings_ panel lets you change absolutely everything in the interface without
+  needing root.
+
+### Cons
+
+- **Permanent loss of Knox:** blowing the e-Fuse permanently disables native features like Samsung Pass, Secure Folder,
+  and Samsung Pay.
+- **Stock camera quality:** the default AOSP camera app tends to be simpler than Samsung's (which can be worked around
+  by installing a GCam).
+- **Play Integrity / banking apps:** without extra tweaks (like hiding modules), apps that require strict security
+  checks (like banks and Gov.br) may refuse to work.
+
+## Installing crDroid
+
+For anyone curious about the "behind the scenes" of what I did, there was no mystery to the process, but it does require
+a well-defined sequence in the correct order:
+
+1. **Unlock the bootloader:** this step is done in the developer options menu, unlocking the phone to accept software
+   not signed by Samsung. _Keep in mind this voids the product's warranty._
+2. **Flash the custom recovery mode via Odin:** just put the device into Download mode and send over the recovery.img
+   and vbmeta.img files via Odin (or heimdall-flash on Linux). On the Galaxy M31, Download mode is accessed with the
+   device turned off, by holding both volume buttons and then connecting the device to the computer via cable.
+3. **Flash the crDroid ROM and MindTheGapps:** access recovery mode (Vol. Up + Power button with the phone connected to
+   the PC), factory reset, and use `adb sideload` to load the ROM file and MindTheGapps, one at a time.
+
+After that it was just a matter of restarting the phone, adding my Google account, going through the basic system setup,
+and I was already having fun customizing my phone's entire interface.
+
+## Conclusion
+
+Seeing a 2020 mid-ranger running the latest version of Android this smoothly shows the value of the open-source
+community. My old phone, forgotten in a drawer, turned into a perfect device for testing, development, and use as a
+backup phone.
+
+If you have a phone gathering dust that's supported by crDroid, it's well worth taking a weekend to try it out!
+
+## Useful links
+
+- [crDroid page for the Galaxy M31](https://crdroid.net/m31/12)
+- [Installation instructions](https://crdroid.net/m31/12/install)
+- [How to root the Galaxy M31](https://magiskzip.com/how-to-root-samsung-galaxy-m31-using-magisk/): instructions on how
+  to unlock the bootloader and use Odin.
+- [List of open-source apps that use Shizuku](https://github.com/timschneeb/awesome-shizuku)
+- [Another list of Shizuku apps as a root alternative](https://github.com/krishna3163/shizuku-apps-root-alternative)
