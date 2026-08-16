@@ -294,7 +294,7 @@ export function useWindow(options: WindowOptions): UseWindowResult {
 
   // Registra/atualiza a entrada na Taskbar sempre que mode/rect mudam.
   useEffect(() => {
-    upsert({ id, title, icon, mode, toggle });
+    upsert({ id, title, icon, mode, toggle, minimize });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, title, icon, mode, rect]);
 

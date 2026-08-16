@@ -6,7 +6,7 @@
 
 "use client";
 
-import { createContext, useCallback, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import type { IconComponent, WindowMode } from "./types";
 
 export interface WindowRegistryEntry {
@@ -15,6 +15,7 @@ export interface WindowRegistryEntry {
   icon: IconComponent;
   mode: WindowMode;
   toggle: () => void;
+  minimize: () => void;
 }
 
 interface WindowManagerContextValue {
@@ -48,6 +49,26 @@ export function WindowManagerProvider({
       return next;
     });
   }, []);
+
+  // Clicar fora de qualquer janela (e fora da taskbar) minimiza todas as
+  // janelas abertas, pra quem só quer ver a página sem precisar fechar
+  // cada uma manualmente. `data-window-root`/`data-taskbar` marcam o que
+  // conta como "dentro" — ver WindowFrame.tsx e Taskbar.tsx.
+  useEffect(() => {
+    function handlePointerDown(e: PointerEvent) {
+      const target = e.target as HTMLElement | null;
+      if (target?.closest("[data-window-root], [data-taskbar]")) return;
+
+      for (const entry of Object.values(registry)) {
+        if (entry.mode === "open" || entry.mode === "maximized") {
+          entry.minimize();
+        }
+      }
+    }
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [registry]);
 
   return (
     <WindowManagerContext.Provider

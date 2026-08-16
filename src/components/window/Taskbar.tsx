@@ -12,7 +12,10 @@ export function Taskbar() {
   const { windows } = useWindowManager();
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[9999] border-t border-border bg-bg/80 backdrop-blur px-4 py-2">
+    <div
+      data-taskbar
+      className="fixed inset-x-0 bottom-0 z-[9999] border-t border-border bg-bg/80 backdrop-blur px-4 py-2"
+    >
       <div className="max-w-6xl mx-auto flex items-center gap-2">
         {windows.map((win) => {
           const Icon = win.icon;

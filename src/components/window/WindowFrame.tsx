@@ -70,6 +70,7 @@ export function WindowFrame({
   return (
     <div
       style={windowStyle}
+      data-window-root
       // Captura (não bubble) pra trazer a janela pra frente mesmo quando um
       // filho (botão, input) chama stopPropagation no bubble do pointerdown.
       onPointerDownCapture={onFocus}
