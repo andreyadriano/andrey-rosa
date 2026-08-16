@@ -12,41 +12,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon, GITHUB_LINK_CLASSNAME } from "@/components/icons";
+import { Download } from "lucide-react";
 import { SectionLabel } from "@/components/SectionLabel";
 import { SignalDivider } from "@/components/SignalDivider";
 import { ProjectCard } from "@/components/ProjectCard";
 import { PostCard } from "@/components/PostCard";
+import { socials } from "@/components/socials";
 import { getDictionary } from "@/i18n/config";
 import { getFeaturedProjects } from "@/data/projects";
 import { getAllPosts } from "@/lib/blog";
 import type { Lang } from "@/types";
 
 const GITHUB_USERNAME = "andreyadriano";
-
-const socials = [
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/andrey-adriano-da-rosa",
-    Icon: LinkedinIcon,
-    className:
-      "border-[#0a66c2]/50 text-[#0a66c2] hover:bg-[#0a66c2] hover:text-white hover:border-[#0a66c2]",
-  },
-  {
-    label: "GitHub",
-    href: "https://github.com/andreyadriano",
-    Icon: GithubIcon,
-    className: GITHUB_LINK_CLASSNAME,
-  },
-  {
-    label: "E-mail",
-    href: "mailto:andrey.adriano01@hotmail.com",
-    Icon: Mail,
-    className:
-      "border-accent/50 text-accent hover:bg-accent hover:text-accent-fg hover:border-accent",
-  },
-];
 
 // ---------------------------------------------------------------------------
 // Página
@@ -69,14 +46,13 @@ export default async function HomePage({ params }: HomePageProps) {
       <section className="border-b border-border">
         <div className="max-w-6xl mx-auto px-6 py-24 md:py-40 min-h-[80vh] flex flex-col md:grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 md:items-center">
           <div>
-            <h1 className="font-mono text-[clamp(1.375rem,5vw+0.5rem,3.75rem)] font-medium leading-[1.05] tracking-tight text-fg whitespace-nowrap text-center md:text-left">
-              {dict.home.hero.greeting}{" "}
-              <span className="text-accent">Andrey</span>!
+            <h1 className="font-mono text-[clamp(1.375rem,5vw+0.5rem,3.75rem)] font-medium leading-[1.05] tracking-tight text-accent whitespace-nowrap text-center md:text-left">
+              Andrey Adriano da Rosa
             </h1>
 
-            <p className="mt-4 text-lg md:text-xl text-fg-muted max-w-xl mx-auto text-center md:mx-0 md:text-left">
+            <h2 className="mt-4 text-lg md:text-xl font-normal text-fg-muted max-w-xl mx-auto text-center md:mx-0 md:text-left">
               {dict.home.hero.subtitle}
-            </p>
+            </h2>
 
             {/* No mobile a foto entra aqui embaixo, entre o texto e os
                 botões; no desktop essa cópia fica escondida e a outra
@@ -94,14 +70,15 @@ export default async function HomePage({ params }: HomePageProps) {
               />
             </div>
 
-            <div className="flex flex-col items-center gap-4 md:mt-3 md:flex-row md:items-center md:justify-start">
+            <div className="mt-8 flex flex-col items-center gap-4 md:flex-row md:items-center md:gap-5">
               <SignalDivider />
               <a
                 href={`/${lang}/resume/pdf`}
                 download={`CV_Andrey_Rosa_${lang.toUpperCase()}.pdf`}
-                className="font-mono text-sm font-medium text-accent-2 hover:text-accent-2-hover transition-colors underline underline-offset-4 decoration-accent-2/40"
+                className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-fg hover:bg-accent-hover transition-colors"
               >
-                {dict.home.hero.ctaResume} ↓
+                <Download size={16} strokeWidth={1.75} />
+                {dict.home.hero.ctaResume}
               </a>
             </div>
 
