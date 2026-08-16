@@ -60,8 +60,10 @@ export function FileExplorerApp({
       mode={win.mode}
       rect={win.rect}
       isOpen={win.isOpen}
+      zIndex={win.zIndex}
       onTitleBarPointerDown={win.onTitleBarPointerDown}
       onResizePointerDown={win.onResizePointerDown}
+      onFocus={win.bringToFront}
       onMinimize={win.minimize}
       onToggleMaximize={win.toggleMaximize}
       onClose={handleClose}

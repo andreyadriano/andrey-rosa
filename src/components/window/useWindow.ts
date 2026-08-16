@@ -13,11 +13,13 @@ import { useWindowManager } from "./WindowManagerContext";
 import type { Rect, ResizeDir, WindowMode, WindowOptions } from "./types";
 
 const DEFAULT_MIN_SIZE = { width: 280, height: 200 };
+const BASE_Z_INDEX = 10000;
 
 interface PersistedWindowState {
   mode: WindowMode;
   rect: Rect | null;
   preMaximizeRect: Rect | null;
+  zIndex: number;
 }
 
 // Troca de idioma (/pt <-> /en) remonta [lang]/layout.tsx e, com ele, todo
@@ -25,6 +27,11 @@ interface PersistedWindowState {
 // Guardar aqui, fora do React e por id, é o que faz cada janela sobreviver
 // a esse remount sem resetar posição/modo.
 const persistedWindows = new Map<string, PersistedWindowState>();
+
+// Contador global compartilhado por todas as janelas — "trazer pra frente"
+// é só pegar o próximo valor daqui, então a última janela mexida (arrastada,
+// redimensionada, clicada) sempre fica com o zIndex mais alto.
+let topZIndex = BASE_Z_INDEX;
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
@@ -45,8 +52,10 @@ export interface UseWindowResult {
   mode: WindowMode;
   rect: Rect | null;
   isOpen: boolean;
+  zIndex: number;
   onTitleBarPointerDown: (e: React.PointerEvent) => void;
   onResizePointerDown: (e: React.PointerEvent, dir: ResizeDir) => void;
+  bringToFront: () => void;
   minimize: () => void;
   toggleMaximize: () => void;
   close: () => void;
@@ -71,6 +80,14 @@ export function useWindow(options: WindowOptions): UseWindowResult {
   const [preMaximizeRect, setPreMaximizeRect] = useState<Rect | null>(
     persisted?.preMaximizeRect ?? null,
   );
+  // Numa troca de idioma (remount), mantém o zIndex que a janela já tinha
+  // em vez de reatribuir — senão trocar de idioma embaralharia a ordem de
+  // empilhamento que o usuário organizou.
+  const [zIndex, setZIndex] = useState<number>(() => {
+    if (persisted) return persisted.zIndex;
+    topZIndex += 1;
+    return topZIndex;
+  });
   const [isDragging, setIsDragging] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
   const dragRef = useRef<{
@@ -92,8 +109,15 @@ export function useWindow(options: WindowOptions): UseWindowResult {
   // Mantém o módulo em sincronia com o estado atual a cada render, pra
   // sobreviver a um remount (ver comentário de PersistedWindowState acima).
   useEffect(() => {
-    persistedWindows.set(id, { mode, rect, preMaximizeRect });
+    persistedWindows.set(id, { mode, rect, preMaximizeRect, zIndex });
   });
+
+  // Traz a janela pra frente de todas as outras — chamado ao arrastar,
+  // redimensionar, ou clicar em qualquer lugar dela (ver WindowFrame).
+  function bringToFront() {
+    topZIndex += 1;
+    setZIndex(topZIndex);
+  }
 
   // Evita selecionar texto da página sem querer enquanto arrasta/redimensiona.
   useEffect(() => {
@@ -197,6 +221,8 @@ export function useWindow(options: WindowOptions): UseWindowResult {
     };
   }, [isResizing, minSize.width, minSize.height]);
 
+  // bringToFront pro drag/resize em si já acontece via onFocus (pointerdown
+  // em captura, ver WindowFrame) — não precisa chamar de novo aqui.
   function onTitleBarPointerDown(e: React.PointerEvent) {
     let originRect = rect ?? getCenteredRect(defaultSize);
 
@@ -255,6 +281,7 @@ export function useWindow(options: WindowOptions): UseWindowResult {
   function restore() {
     if (!rect) setRect(getCenteredRect(defaultSize));
     setMode("open");
+    bringToFront();
   }
 
   function toggle() {
@@ -284,8 +311,10 @@ export function useWindow(options: WindowOptions): UseWindowResult {
     mode,
     rect,
     isOpen,
+    zIndex,
     onTitleBarPointerDown,
     onResizePointerDown,
+    bringToFront,
     minimize,
     toggleMaximize,
     close,

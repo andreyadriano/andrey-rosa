@@ -29,8 +29,10 @@ interface WindowFrameProps {
   mode: WindowMode;
   rect: Rect | null;
   isOpen: boolean;
+  zIndex: number;
   onTitleBarPointerDown: (e: React.PointerEvent) => void;
   onResizePointerDown: (e: React.PointerEvent, dir: ResizeDir) => void;
+  onFocus: () => void;
   onMinimize: () => void;
   onToggleMaximize: () => void;
   onClose: () => void;
@@ -42,8 +44,10 @@ export function WindowFrame({
   mode,
   rect,
   isOpen,
+  zIndex,
   onTitleBarPointerDown,
   onResizePointerDown,
+  onFocus,
   onMinimize,
   onToggleMaximize,
   onClose,
@@ -53,19 +57,22 @@ export function WindowFrame({
 
   const windowStyle: React.CSSProperties =
     mode === "maximized"
-      ? { position: "fixed", inset: "5vh 5vw", zIndex: 10000 }
+      ? { position: "fixed", inset: "5vh 5vw", zIndex }
       : {
           position: "fixed",
           left: rect!.x,
           top: rect!.y,
           width: rect!.width,
           height: rect!.height,
-          zIndex: 10000,
+          zIndex,
         };
 
   return (
     <div
       style={windowStyle}
+      // Captura (não bubble) pra trazer a janela pra frente mesmo quando um
+      // filho (botão, input) chama stopPropagation no bubble do pointerdown.
+      onPointerDownCapture={onFocus}
       className="fixed flex flex-col rounded-lg border border-border bg-bg-elevated font-mono text-xs md:text-[0.8125rem] shadow-2xl overflow-hidden"
     >
       <div
