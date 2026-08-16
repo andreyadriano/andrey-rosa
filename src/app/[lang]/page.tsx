@@ -15,6 +15,7 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon, GITHUB_LINK_CLASSNAME } from "@/components/icons";
 import { SectionLabel } from "@/components/SectionLabel";
+import { SignalDivider } from "@/components/SignalDivider";
 import { ProjectCard } from "@/components/ProjectCard";
 import { PostCard } from "@/components/PostCard";
 import { getDictionary } from "@/i18n/config";
@@ -48,31 +49,6 @@ const socials = [
 ];
 
 // ---------------------------------------------------------------------------
-// Elemento assinatura: barra tipo "spectrum analyzer", usada como divisor
-// ---------------------------------------------------------------------------
-
-function SignalDivider() {
-  const bars = [3, 6, 4, 8, 5, 9, 4, 7, 3, 6, 5, 8, 4, 6, 3];
-  return (
-    <div
-      aria-hidden="true"
-      className="group flex items-end gap-[0.1875rem] h-4 opacity-60 hover:opacity-100 transition-opacity cursor-default"
-    >
-      {bars.map((h, i) => (
-        <span
-          key={i}
-          className="w-[0.1875rem] origin-bottom bg-gradient-to-t from-accent/70 to-accent-2/70 transition-transform group-hover:animate-[signal-bounce_0.7s_ease-in-out_infinite]"
-          style={{
-            height: `${h * 0.125}rem`,
-            animationDelay: `${i * 70}ms`,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-// ---------------------------------------------------------------------------
 // Página
 // ---------------------------------------------------------------------------
 
@@ -91,18 +67,34 @@ export default async function HomePage({ params }: HomePageProps) {
     <main className="bg-bg text-fg min-h-screen selection:bg-accent/30">
       {/* HERO */}
       <section className="border-b border-border">
-        <div className="max-w-6xl mx-auto px-6 py-24 md:py-40 min-h-[80vh] grid md:grid-cols-[1fr_auto] gap-12 items-center">
+        <div className="max-w-6xl mx-auto px-6 py-24 md:py-40 min-h-[80vh] flex flex-col md:grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 md:items-center">
           <div>
-            <h1 className="font-mono text-[clamp(2rem,2.2vw+1.25rem,3.75rem)] font-medium leading-[1.05] tracking-tight text-fg md:whitespace-nowrap">
+            <h1 className="font-mono text-[clamp(1.375rem,5vw+0.5rem,3.75rem)] font-medium leading-[1.05] tracking-tight text-fg whitespace-nowrap text-center md:text-left">
               {dict.home.hero.greeting}{" "}
               <span className="text-accent">Andrey</span>!
             </h1>
 
-            <p className="mt-4 text-lg md:text-xl text-fg-muted max-w-xl">
+            <p className="mt-4 text-lg md:text-xl text-fg-muted max-w-xl mx-auto text-center md:mx-0 md:text-left">
               {dict.home.hero.subtitle}
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-4">
+            {/* No mobile a foto entra aqui embaixo, entre o texto e os
+                botões; no desktop essa cópia fica escondida e a outra
+                (fora deste bloco) assume a coluna da direita — evita o
+                bug de auto-altura do CSS grid ao tentar usar uma foto com
+                row-span pra alcançar o mesmo efeito. */}
+            <div className="my-8 mx-auto w-[clamp(11rem,18vw,20rem)] md:hidden">
+              <Image
+                src={`https://github.com/${GITHUB_USERNAME}.png`}
+                alt="Andrey Adriano da Rosa"
+                width={400}
+                height={400}
+                className="h-auto w-full rounded-full ring-2 ring-accent/60 ring-offset-4 ring-offset-bg"
+                priority
+              />
+            </div>
+
+            <div className="flex flex-col items-center gap-4 md:mt-3 md:flex-row md:items-center md:justify-start">
               <SignalDivider />
               <a
                 href={`/${lang}/resume/pdf`}
@@ -113,14 +105,14 @@ export default async function HomePage({ params }: HomePageProps) {
               </a>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-nowrap items-center justify-center gap-1.5 md:justify-start md:gap-3">
               {socials.map(({ label, href, Icon, className }) => (
                 <a
                   key={label}
                   href={href}
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel="noreferrer"
-                  className={`inline-flex items-center gap-2 rounded-md border px-4 py-2 text-sm font-medium transition-colors ${className}`}
+                  className={`inline-flex items-center gap-1 md:gap-2 rounded-md border px-2.5 py-1.5 text-xs whitespace-nowrap md:px-4 md:py-2 md:text-sm font-medium transition-colors ${className}`}
                 >
                   <Icon size={16} strokeWidth={1.75} />
                   {label}
@@ -129,7 +121,7 @@ export default async function HomePage({ params }: HomePageProps) {
             </div>
           </div>
 
-          <div className="mx-auto w-[clamp(11rem,18vw,20rem)]">
+          <div className="hidden md:block mx-auto w-[clamp(11rem,18vw,20rem)]">
             <Image
               src={`https://github.com/${GITHUB_USERNAME}.png`}
               alt="Andrey Adriano da Rosa"

@@ -7,6 +7,7 @@
 import Link from "next/link";
 import { LangSwitcher } from "@/components/LangSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { MobileMenu } from "@/components/MobileMenu";
 import { getDictionary } from "@/i18n/config";
 import type { Lang } from "@/types";
 
@@ -22,8 +23,10 @@ export async function TopBar({ lang }: { lang: Lang }) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-bg/80 backdrop-blur">
-      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-6">
-        <nav className="flex items-center gap-5">
+      <div className="relative max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-6">
+        <MobileMenu navLinks={navLinks} />
+
+        <nav className="hidden md:flex items-center gap-5">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -35,7 +38,7 @@ export async function TopBar({ lang }: { lang: Lang }) {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           <LangSwitcher lang={lang} />
           <span className="h-4 w-px bg-border" aria-hidden="true" />
           <ThemeToggle />
