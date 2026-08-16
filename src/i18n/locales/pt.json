@@ -62,8 +62,20 @@
           { "cmd": "whoami", "desc": "mostra minhas informações" },
           { "cmd": "clear", "desc": "limpa o terminal" },
           { "cmd": "reboot", "desc": "recarrega a página" },
-          { "cmd": "help", "desc": "lista os comandos disponíveis" }
+          { "cmd": "help", "desc": "lista os comandos disponíveis" },
+          {
+            "cmd": "cmd1 && cmd2",
+            "desc": "executa cmd2 só se cmd1 tiver sucesso (ex.: cd projects && open readme.link)"
+          }
         ],
+        "errors": {
+          "notFound": "{cmd}: {arg}: Arquivo ou diretório inexistente",
+          "notADirectory": "{cmd}: {arg}: Não é um diretório",
+          "missingOperand": "{cmd}: operando de arquivo ausente",
+          "isADirectory": "{cmd}: {arg}: É um diretório",
+          "useOpen": "cat: {arg}: use \"open\" pra abrir este arquivo",
+          "commandNotFound": "bash: {cmd}: comando não encontrado"
+        },
         "focus": "Linux Embarcado & VoIP",
         "experience": "3+ anos",
         "stack": "Go · React · C · Lua · Asterisk",

@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { formatCwd, getNode, resolvePath } from "@/lib/vfs/path";
 import type { VfsDirectory } from "@/lib/vfs/types";
 import { RowList } from "./RowList";
-import type { HelpEntry, LogEntry, Row } from "./types";
+import type { ErrorMessages, HelpEntry, LogEntry, Row } from "./types";
 
 const BOOT_LINE_DELAY_MS = 650;
 const TYPE_CHAR_DELAY_MS = 90;
@@ -36,6 +36,11 @@ interface ShellPersistedState {
 
 const persistedShells = new Map<string, ShellPersistedState>();
 
+// Substitui {cmd}/{arg} num template de erro vindo do dicionário.
+function format(template: string, vars: Record<string, string>): string {
+  return template.replace(/\{(\w+)\}/g, (_, key: string) => vars[key] ?? "");
+}
+
 function longestCommonPrefix(options: string[]): string {
   if (options.length === 0) return "";
   let prefix = options[0];
@@ -56,6 +61,7 @@ interface UseShellOptions {
   rows: Row[];
   fs: VfsDirectory;
   help: HelpEntry[];
+  errors: ErrorMessages;
 }
 
 export function useShell({
@@ -66,6 +72,7 @@ export function useShell({
   rows,
   fs,
   help,
+  errors,
 }: UseShellOptions) {
   const router = useRouter();
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -88,6 +95,15 @@ export function useShell({
     () => persisted?.historyIndex ?? null,
   );
   const [cwd, setCwd] = useState<string[]>(() => persisted?.cwd ?? []);
+  // Espelha `cwd` de forma síncrona — necessário porque um "cd x && open y"
+  // roda os dois comandos no mesmo tick, antes do re-render que aplicaria o
+  // novo `cwd` vindo de setCwd(); sem isso, o "open" ainda enxergaria o cwd
+  // antigo.
+  const cwdRef = useRef(cwd);
+
+  useEffect(() => {
+    cwdRef.current = cwd;
+  }, [cwd]);
 
   useEffect(() => {
     persistedShells.set(id, {
@@ -153,106 +169,110 @@ export function useShell({
   }, [log, phase]);
 
   function currentDir(): VfsDirectory {
-    const node = getNode(fs, cwd);
+    const node = getNode(fs, cwdRef.current);
     return node && node.type === "directory" ? node : fs;
   }
 
-  function runCommand(raw: string): React.ReactNode {
+  interface CommandResult {
+    output: React.ReactNode;
+    ok: boolean;
+  }
+
+  function errorResult(message: string): CommandResult {
+    return { output: <p className="text-fg-muted">{message}</p>, ok: false };
+  }
+
+  function runCommand(raw: string): CommandResult {
     const [cmdRaw, ...rest] = raw.trim().split(/\s+/);
     const cmd = cmdRaw.toLowerCase();
     const argRaw = rest.join(" ").trim();
     const arg = argRaw.replace(/\/$/, "");
 
     if (cmd === "whoami") {
-      return <RowList rows={rows} />;
+      return { output: <RowList rows={rows} />, ok: true };
     }
 
     if (cmd === "help") {
-      return (
-        <RowList
-          rows={help.map((entry) => ({ label: entry.cmd, value: entry.desc }))}
-        />
-      );
+      return {
+        output: (
+          <RowList
+            rows={help.map((entry) => ({ label: entry.cmd, value: entry.desc }))}
+          />
+        ),
+        ok: true,
+      };
     }
 
     if (cmd === "reboot") {
       window.location.reload();
-      return null;
+      return { output: null, ok: true };
     }
 
     if (cmd === "ls") {
-      const target = arg ? resolvePath(fs, cwd, arg) : { node: currentDir(), path: cwd };
+      const target = arg
+        ? resolvePath(fs, cwdRef.current, arg)
+        : { node: currentDir(), path: cwdRef.current };
       if (!target || target.node.type !== "directory") {
-        return (
-          <p className="text-fg-muted">
-            ls: {argRaw}: No such file or directory
-          </p>
-        );
+        return errorResult(format(errors.notFound, { cmd: "ls", arg: argRaw }));
       }
-      return (
-        <div className="flex flex-wrap gap-x-5 gap-y-1 py-1 text-accent-2">
-          {target.node.children.map((child) => (
-            <span key={child.name}>
-              {child.name}
-              {child.type === "directory" ? "/" : ""}
-            </span>
-          ))}
-        </div>
-      );
+      return {
+        output: (
+          <div className="flex flex-wrap gap-x-5 gap-y-1 py-1 text-accent-2">
+            {target.node.children.map((child) => (
+              <span key={child.name}>
+                {child.name}
+                {child.type === "directory" ? "/" : ""}
+              </span>
+            ))}
+          </div>
+        ),
+        ok: true,
+      };
     }
 
     if (cmd === "cd") {
       if (!arg || arg === "home") {
+        cwdRef.current = [];
         setCwd([]);
-        return null;
+        return { output: null, ok: true };
       }
-      const target = resolvePath(fs, cwd, arg);
+      const target = resolvePath(fs, cwdRef.current, arg);
       if (!target) {
-        return (
-          <p className="text-fg-muted">
-            cd: {argRaw}: No such file or directory
-          </p>
-        );
+        return errorResult(format(errors.notFound, { cmd: "cd", arg: argRaw }));
       }
       if (target.node.type !== "directory") {
-        return <p className="text-fg-muted">cd: {argRaw}: Not a directory</p>;
+        return errorResult(format(errors.notADirectory, { cmd: "cd", arg: argRaw }));
       }
+      cwdRef.current = target.path;
       setCwd(target.path);
-      return null;
+      return { output: null, ok: true };
     }
 
     if (cmd === "cat" || cmd === "open") {
       if (!arg) {
-        return <p className="text-fg-muted">{cmd}: missing file operand</p>;
+        return errorResult(format(errors.missingOperand, { cmd }));
       }
-      const target = resolvePath(fs, cwd, arg);
+      const target = resolvePath(fs, cwdRef.current, arg);
       if (!target) {
-        return (
-          <p className="text-fg-muted">
-            {cmd}: {argRaw}: No such file or directory
-          </p>
-        );
+        return errorResult(format(errors.notFound, { cmd, arg: argRaw }));
       }
       if (target.node.type === "directory") {
-        return (
-          <p className="text-fg-muted">
-            {cmd}: {argRaw}: Is a directory
-          </p>
-        );
+        return errorResult(format(errors.isADirectory, { cmd, arg: argRaw }));
       }
 
       const file = target.node;
 
       if (file.kind === "text") {
-        return <p className="whitespace-pre-wrap text-fg-subtle">{file.content}</p>;
+        return {
+          output: (
+            <p className="whitespace-pre-wrap text-fg-subtle">{file.content}</p>
+          ),
+          ok: true,
+        };
       }
 
       if (cmd === "cat") {
-        return (
-          <p className="text-fg-muted">
-            cat: {argRaw}: use &quot;open&quot; pra abrir este arquivo
-          </p>
-        );
+        return errorResult(format(errors.useOpen, { arg: argRaw }));
       }
 
       // open
@@ -262,48 +282,86 @@ export function useShell({
         } else {
           window.open(file.href, "_blank", "noreferrer");
         }
-        return null;
+        return { output: null, ok: true };
       }
       if (file.kind === "image" && file.src) {
         // Placeholder até o Explorador de Arquivos ter um visualizador de
         // verdade — por enquanto só abre a imagem em outra aba.
         window.open(file.src, "_blank", "noreferrer");
-        return null;
+        return { output: null, ok: true };
       }
-      return null;
+      return { output: null, ok: true };
     }
 
-    return <p className="text-fg-muted">bash: {cmdRaw}: command not found</p>;
+    return errorResult(format(errors.commandNotFound, { cmd: cmdRaw }));
   }
 
-  function autocomplete(value: string): { value: string; list?: string[] } {
-    const spaceIndex = value.indexOf(" ");
+  // Suporta "cmd1 && cmd2 && ..." como um shell de verdade: cada comando só
+  // roda se o anterior teve sucesso, e a saída de todos é concatenada sob a
+  // mesma linha de comando digitada (não ecoa cada parte separadamente).
+  function runChain(raw: string): React.ReactNode {
+    const parts = raw.split(/\s*&&\s*/).filter((part) => part.trim().length > 0);
+    const outputs: React.ReactNode[] = [];
+
+    for (const part of parts) {
+      const result = runCommand(part);
+      if (result.output) outputs.push(result.output);
+      if (!result.ok) break;
+    }
+
+    if (outputs.length === 0) return null;
+    if (outputs.length === 1) return outputs[0];
+    return (
+      <>
+        {outputs.map((output, i) => (
+          <div key={i}>{output}</div>
+        ))}
+      </>
+    );
+  }
+
+  // Autocompleta um único comando (sem "&&") — chamado sobre o último
+  // segmento de uma cadeia, ver autocomplete() abaixo.
+  function completeSegment(segment: string): { value: string; list?: string[] } {
+    const spaceIndex = segment.indexOf(" ");
 
     if (spaceIndex === -1) {
-      const prefix = value.toLowerCase();
+      const prefix = segment.toLowerCase();
       const matches = COMMANDS.filter((c) => c.startsWith(prefix));
-      if (matches.length === 0) return { value };
+      if (matches.length === 0) return { value: segment };
       if (matches.length === 1) {
         const needsArg = COMMANDS_WITH_FILE_ARG.includes(matches[0]);
         return { value: needsArg ? `${matches[0]} ` : matches[0] };
       }
       const common = longestCommonPrefix(matches);
       if (common.length > prefix.length) return { value: common };
-      return { value, list: matches };
+      return { value: segment, list: matches };
     }
 
-    const cmd = value.slice(0, spaceIndex).toLowerCase();
-    const argPrefix = value.slice(spaceIndex + 1).toLowerCase();
-    if (!COMMANDS_WITH_FILE_ARG.includes(cmd)) return { value };
+    const cmd = segment.slice(0, spaceIndex).toLowerCase();
+    const argPrefix = segment.slice(spaceIndex + 1).toLowerCase();
+    if (!COMMANDS_WITH_FILE_ARG.includes(cmd)) return { value: segment };
 
     const matches = currentDir()
       .children.map((child) => child.name)
       .filter((name) => name.toLowerCase().startsWith(argPrefix));
-    if (matches.length === 0) return { value };
+    if (matches.length === 0) return { value: segment };
     if (matches.length === 1) return { value: `${cmd} ${matches[0]}` };
     const common = longestCommonPrefix(matches.map((m) => m.toLowerCase()));
     if (common.length > argPrefix.length) return { value: `${cmd} ${common}` };
-    return { value, list: matches };
+    return { value: segment, list: matches };
+  }
+
+  // Tab também funciona depois de um "&&": só o último comando da cadeia é
+  // autocompletado, o resto da linha já digitada fica intacto — mesmo
+  // comportamento do bash pra `cmd1 && cmd2<Tab>`.
+  function autocomplete(value: string): { value: string; list?: string[] } {
+    const match = value.match(/^(.*&&\s*)([^&]*)$/);
+    const prefix = match ? match[1] : "";
+    const segment = match ? match[2] : value;
+
+    const result = completeSegment(segment);
+    return { value: prefix + result.value, list: result.list };
   }
 
   function handleSubmit() {
@@ -328,7 +386,7 @@ export function useShell({
     const entryId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
     setLog((prev) => [...prev, { id: entryId, type: "cmd", content: value }]);
 
-    const output = runCommand(value);
+    const output = runChain(value);
     if (output) {
       setLog((prev) => [
         ...prev,
@@ -399,6 +457,7 @@ export function useShell({
     setInput("");
     setHistory([]);
     setHistoryIndex(null);
+    cwdRef.current = [];
     setCwd([]);
   }
 

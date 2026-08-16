@@ -11,7 +11,7 @@ import { useWindow } from "@/components/window/useWindow";
 import { WindowFrame } from "@/components/window/WindowFrame";
 import type { VfsDirectory } from "@/lib/vfs/types";
 import { useShell } from "./useShell";
-import type { HelpEntry, Row } from "./types";
+import type { ErrorMessages, HelpEntry, Row } from "./types";
 
 const APP_ID = "terminal";
 const DEFAULT_SIZE = { width: 520, height: 420 };
@@ -23,6 +23,7 @@ interface TerminalAppProps {
   rows: Row[];
   fs: VfsDirectory;
   help: HelpEntry[];
+  errors: ErrorMessages;
 }
 
 export function TerminalApp({
@@ -32,6 +33,7 @@ export function TerminalApp({
   rows,
   fs,
   help,
+  errors,
 }: TerminalAppProps) {
   const win = useWindow({
     id: APP_ID,
@@ -53,7 +55,7 @@ export function TerminalApp({
     inputRef,
     scrollRef,
     reset,
-  } = useShell({ id: APP_ID, prompt, bootCommand, bootLines, rows, fs, help });
+  } = useShell({ id: APP_ID, prompt, bootCommand, bootLines, rows, fs, help, errors });
 
   function handleClose() {
     win.close();

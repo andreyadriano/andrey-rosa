@@ -76,6 +76,7 @@ export default async function LangLayout({
           rows={terminalRows}
           fs={fileSystem}
           help={terminal.help}
+          errors={terminal.errors}
         />
         <FileExplorerApp
           fs={fileSystem}

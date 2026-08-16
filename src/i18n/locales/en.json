@@ -62,8 +62,20 @@
           { "cmd": "whoami", "desc": "show my info" },
           { "cmd": "clear", "desc": "clear the terminal" },
           { "cmd": "reboot", "desc": "reload the page" },
-          { "cmd": "help", "desc": "list available commands" }
+          { "cmd": "help", "desc": "list available commands" },
+          {
+            "cmd": "cmd1 && cmd2",
+            "desc": "run cmd2 only if cmd1 succeeds (e.g. cd projects && open readme.link)"
+          }
         ],
+        "errors": {
+          "notFound": "{cmd}: {arg}: No such file or directory",
+          "notADirectory": "{cmd}: {arg}: Not a directory",
+          "missingOperand": "{cmd}: missing file operand",
+          "isADirectory": "{cmd}: {arg}: Is a directory",
+          "useOpen": "cat: {arg}: use \"open\" to open this file",
+          "commandNotFound": "bash: {cmd}: command not found"
+        },
         "focus": "Embedded Linux & VoIP",
         "experience": "3+ years",
         "stack": "Go · React · C · Lua · Asterisk",
