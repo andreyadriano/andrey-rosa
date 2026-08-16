@@ -5,6 +5,7 @@
 // e PDF nunca ficam dessincronizados.
 
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Download } from "lucide-react";
 import { SectionLabel } from "@/components/SectionLabel";
 import { getDictionary } from "@/i18n/config";
@@ -25,7 +26,14 @@ export default async function ResumePage({ params }: ResumePageProps) {
   return (
     <main className="bg-bg text-fg min-h-screen">
       <section className="max-w-6xl mx-auto px-6 py-20">
-        <div className="flex flex-wrap items-start justify-between gap-6">
+        <Link
+          href={`/${lang}`}
+          className="font-mono text-sm text-accent-2 hover:text-accent-2-hover transition-colors"
+        >
+          {dict.common.backHome}
+        </Link>
+
+        <div className="mt-6 flex flex-wrap items-start justify-between gap-6">
           <div>
             <h1 className="font-mono text-4xl md:text-5xl font-medium tracking-tight text-fg">
               {dict.resumePage.title}

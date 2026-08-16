@@ -1,4 +1,7 @@
 {
+  "common": {
+    "backHome": "← Voltar para o início"
+  },
   "nav": {
     "home": "Início",
     "projects": "Projetos",

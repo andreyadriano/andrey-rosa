@@ -1,4 +1,7 @@
 {
+  "common": {
+    "backHome": "← Back to home"
+  },
   "nav": {
     "home": "Home",
     "projects": "Projects",

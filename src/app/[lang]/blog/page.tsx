@@ -5,6 +5,7 @@
 // o mesmo PostCard usado na seção "Últimos posts" da home.
 
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PostCard } from "@/components/PostCard";
 import { getDictionary } from "@/i18n/config";
 import { getAllPosts } from "@/lib/blog";
@@ -22,7 +23,14 @@ export default async function BlogPage({ params }: BlogPageProps) {
   return (
     <main className="bg-bg text-fg min-h-screen">
       <section className="max-w-6xl mx-auto px-6 py-20">
-        <h1 className="font-mono text-4xl md:text-5xl font-medium tracking-tight text-fg">
+        <Link
+          href={`/${lang}`}
+          className="font-mono text-sm text-accent-2 hover:text-accent-2-hover transition-colors"
+        >
+          {dict.common.backHome}
+        </Link>
+
+        <h1 className="mt-6 font-mono text-4xl md:text-5xl font-medium tracking-tight text-fg">
           {dict.blogPage.title}
         </h1>
         <p className="mt-4 text-lg text-fg-muted max-w-2xl">

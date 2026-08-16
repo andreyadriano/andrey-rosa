@@ -5,6 +5,7 @@
 // destaque" da home.
 
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ProjectCard } from "@/components/ProjectCard";
 import { getDictionary } from "@/i18n/config";
 import { projectsByLang } from "@/data/projects";
@@ -22,7 +23,14 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   return (
     <main className="bg-bg text-fg min-h-screen">
       <section className="max-w-6xl mx-auto px-6 py-20">
-        <h1 className="font-mono text-4xl md:text-5xl font-medium tracking-tight text-fg">
+        <Link
+          href={`/${lang}`}
+          className="font-mono text-sm text-accent-2 hover:text-accent-2-hover transition-colors"
+        >
+          {dict.common.backHome}
+        </Link>
+
+        <h1 className="mt-6 font-mono text-4xl md:text-5xl font-medium tracking-tight text-fg">
           {dict.projectsPage.title}
         </h1>
         <p className="mt-4 text-lg text-fg-muted max-w-2xl">
