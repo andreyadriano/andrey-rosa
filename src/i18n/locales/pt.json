@@ -28,7 +28,7 @@
       "ctaBlog": "Ler blog",
       "ctaResume": "Baixar currículo (PDF)",
       "terminal": {
-        "prompt": "visitante@andrey:~$",
+        "prompt": "visitante@andrey",
         "command": "whoami",
         "boot": [
           "iniciando website...",
@@ -46,10 +46,15 @@
           "status": "status"
         },
         "help": [
-          { "cmd": "ls", "desc": "lista as páginas disponíveis" },
+          { "cmd": "ls [pasta]", "desc": "lista arquivos e pastas" },
           {
-            "cmd": "cd <página>",
-            "desc": "entra em uma página (ex.: cd projects, cd /)"
+            "cmd": "cd <pasta>",
+            "desc": "entra em uma pasta (ex.: cd projects, cd ..)"
+          },
+          { "cmd": "cat <arquivo>", "desc": "mostra o conteúdo de um arquivo de texto" },
+          {
+            "cmd": "open <arquivo>",
+            "desc": "abre um arquivo (link, imagem ou texto)"
           },
           { "cmd": "whoami", "desc": "mostra minhas informações" },
           { "cmd": "clear", "desc": "limpa o terminal" },

@@ -28,7 +28,7 @@
       "ctaBlog": "Read blog",
       "ctaResume": "Download resume (PDF)",
       "terminal": {
-        "prompt": "visitor@andrey:~$",
+        "prompt": "visitor@andrey",
         "command": "whoami",
         "boot": [
           "booting website...",
@@ -46,10 +46,15 @@
           "status": "status"
         },
         "help": [
-          { "cmd": "ls", "desc": "list available pages" },
+          { "cmd": "ls [folder]", "desc": "list files and folders" },
           {
-            "cmd": "cd <page>",
-            "desc": "go to a page (e.g. cd projects, cd /)"
+            "cmd": "cd <folder>",
+            "desc": "go to a folder (e.g. cd projects, cd ..)"
+          },
+          { "cmd": "cat <file>", "desc": "print a text file's content" },
+          {
+            "cmd": "open <file>",
+            "desc": "open a file (link, image, or text)"
           },
           { "cmd": "whoami", "desc": "show my info" },
           { "cmd": "clear", "desc": "clear the terminal" },

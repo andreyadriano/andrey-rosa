@@ -1,0 +1,2 @@
+focus: Embedded Linux & VoIP
+stack: Go · React · C · Lua · Asterisk

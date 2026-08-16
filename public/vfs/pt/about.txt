@@ -1,0 +1,5 @@
+Andrey Adriano da Rosa — desenvolvedor de software focado em VoIP e Linux
+embarcado. Formado em Engenharia de Telecomunicações pelo IFSC.
+
+Trabalho com telefonia IP (telefones, centrais, softphones), do firmware
+embarcado até a interface web.

@@ -1,0 +1,5 @@
+Andrey Adriano da Rosa — software developer focused on VoIP and embedded
+Linux. B.Eng. in Telecommunications Engineering (IFSC).
+
+I work with IP telephony (phones, PBXs, softphones), from embedded firmware
+to the web interface.

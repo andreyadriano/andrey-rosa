@@ -13,7 +13,10 @@ import { LangAlternateProvider } from "@/components/LangAlternateContext";
 import { LangSync } from "@/components/LangSync";
 import { TopBar } from "@/components/TopBar";
 import { Footer } from "@/components/Footer";
-import { TerminalWindow } from "@/components/TerminalWindow";
+import { WindowManagerProvider } from "@/components/window/WindowManagerContext";
+import { Taskbar } from "@/components/window/Taskbar";
+import { TerminalApp } from "@/components/apps/Terminal";
+import { buildFileSystem } from "@/lib/vfs/build";
 import resumeData from "@/data/resume.json";
 import type { Lang, ResumeData } from "@/types";
 
@@ -56,12 +59,7 @@ export default async function LangLayout({
       ),
     },
   ];
-  const terminalPages = [
-    { slug: "home", label: dict.nav.home },
-    { slug: "projects", label: dict.nav.projects },
-    { slug: "blog", label: dict.nav.blog },
-    { slug: "resume", label: dict.nav.resume },
-  ];
+  const fileSystem = buildFileSystem(lang);
 
   return (
     <LangAlternateProvider>
@@ -69,15 +67,17 @@ export default async function LangLayout({
       <TopBar lang={lang} />
       {children}
       <Footer lang={lang} />
-      <TerminalWindow
-        lang={lang}
-        prompt={terminal.prompt}
-        bootCommand={terminal.command}
-        bootLines={terminal.boot}
-        rows={terminalRows}
-        pages={terminalPages}
-        help={terminal.help}
-      />
+      <WindowManagerProvider>
+        <TerminalApp
+          prompt={terminal.prompt}
+          bootCommand={terminal.command}
+          bootLines={terminal.boot}
+          rows={terminalRows}
+          fs={fileSystem}
+          help={terminal.help}
+        />
+        <Taskbar />
+      </WindowManagerProvider>
     </LangAlternateProvider>
   );
 }
