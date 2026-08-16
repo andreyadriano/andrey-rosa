@@ -1,4 +1,4 @@
-# andreyadriano.dev
+# andreyrosa.dev
 
 Site pessoal e portfólio de **Andrey Adriano da Rosa** — Engenheiro de Telecomunicações e desenvolvedor de software focado em VoIP e Linux embarcado. Construído com Next.js (App Router), bilíngue (PT/EN), sem CMS e sem banco de dados: todo o conteúdo — projetos, posts do blog, currículo — vive versionado no próprio repositório.
 
