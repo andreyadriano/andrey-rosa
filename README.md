@@ -1,75 +1,61 @@
-# NextJS Portfolio
+# andreyadriano.dev
 
-Site pessoal / portfólio. Next.js (App Router) com suporte a português e inglês, currículo gerado dinamicamente em PDF e blog em Markdown/MDX — sem CMS, sem banco de dados.
+Site pessoal e portfólio de **Andrey Adriano da Rosa** — Engenheiro de Telecomunicações e desenvolvedor de software focado em VoIP e Linux embarcado. Construído com Next.js (App Router), bilíngue (PT/EN), sem CMS e sem banco de dados: todo o conteúdo — projetos, posts do blog, currículo — vive versionado no próprio repositório.
 
-## Rodando localmente
+## O que tem de interessante aqui
 
-```bash
-npm install
-npm run dev
+### Currículo que gera o próprio PDF
+
+O currículo (`/resume`) e o PDF baixável (`/resume/pdf`) nascem do mesmo arquivo JSON. Não existem dois lugares pra manter sincronizados — o PDF é montado sob demanda com `@react-pdf/renderer`, em um layout pensado pra passar por leitores de ATS: coluna única, sem tabelas, sem texto dentro de imagem.
+
+### Blog em Markdown de verdade, sem CMS
+
+Cada post é um arquivo `.mdx` versionado no git, com os metadados exportados como objeto JS no topo do próprio arquivo (não frontmatter YAML — o compilador MDX em Rust usado pelo Turbopack não aceita plugins remark/rehype). Sem banco de dados, sem painel administrativo: escrever um post é criar um arquivo.
+
+### Um terminal de verdade flutuando na tela
+
+O primeiro elemento que aparece na home não é um hero estático — é um **terminal simulado** que faz boot na sua frente, digita `whoami` sozinho e mostra minhas informações como se fosse a saída de um comando real. Depois disso, ele continua ali, aberto, esperando você digitar algo:
+
+```
+visitante@andrey:~$ whoami
+nome     Andrey Adriano da Rosa
+cargo    Desenvolvedor de software | Linux Embarcado & VoIP
+stack    Go · React · C · Lua · Asterisk
+status   ● Disponível para novas oportunidades
+
+visitante@andrey:~$ ls
+about.txt  blog/  contact/  projects/  resume/  skills.txt
+
+visitante@andrey:~$ cd projects && open readme.link
 ```
 
-Abra [http://localhost:3000](http://localhost:3000) — o `/` redireciona para `/pt`.
+Ele suporta `ls`, `cd`, `cat`, `open`, histórico com as setas, autocomplete com Tab, `clear`, `reboot` — e se comporta como um shell de verdade nos detalhes: erros de "command not found", `Ctrl+L`, sensibilidade a maiúsculas/minúsculas.
 
-## Adicionando um novo projeto
+### ...que navega um sistema de arquivos simulado de verdade
 
-Os projetos vivem em [`src/data/projects.ts`](src/data/projects.ts), um objeto `Record<Lang, Project[]>` com uma entrada em `pt` e outra em `en`. Para adicionar um projeto, adicione um item em **ambos** os arrays:
+O terminal não inventa uma resposta pra `ls` — ele lê uma árvore de diretórios real, montada em tempo de build a partir de arquivos de verdade em `public/vfs/{pt,en}/`. Cada `.txt` é um arquivo de texto, cada `.link` é um atalho (interno ou externo), e imagens funcionam nativamente. Adicionar um arquivo novo ao "sistema operacional" do site é literalmente soltar um arquivo numa pasta — nenhuma linha de código muda.
 
-```ts
-{
-  title: "Nome do projeto",
-  date: "2026-08-15",       // AAAA-MM-DD — usado pra ordenar
-  featured: true,            // aparece nos "Projetos em destaque" da home?
-  description: "Descrição curta (cabe em ~3 linhas no card).",
-  tags: ["Go", "React"],
-  links: [
-    {
-      label: "Visitar",
-      href: "https://...",
-      variant: "primary",    // "primary" (botão verde) ou "secondary" (contorno)
-      icon: "external",      // "external" ou "github"
-    },
-  ],
-}
-```
+### E um Explorador de Arquivos pra quem prefere clicar
 
-- A página **`/projects`** sempre lista todos os projetos, marcados como destaque ou não.
-- A seção **"Projetos em destaque"** da home mostra automaticamente os **3 projetos com `featured: true` mais recentes** (por `date`) — não precisa mexer na home pra isso, é só marcar `featured: true` no projeto e a data certa.
-- `links` aceita mais de um item (ex.: "Visitar" + "Repositório"); ícone `github` usa o estilo de cor específico do GitHub, os outros usam a cor do `variant`.
+O mesmo VFS também é navegável visualmente: uma segunda janela, com grid de ícones, breadcrumb e preview inline de texto/imagem — construída em cima da mesma base do terminal, sem duplicar nenhuma lógica de navegação.
 
-## Adicionando um novo post no blog
+### Um sistema de janelas genérico, não só "um terminal com CSS"
 
-Os posts são arquivos **`.mdx`** em [`src/content/blog/{lang}/{slug}.mdx`](src/content/blog) — sem CMS, sem banco de dados. Cada post vive nos dois idiomas como arquivos separados.
+Terminal e Explorador de Arquivos são as primeiras duas instâncias de uma abstração reaproveitável: `useWindow()` + `<WindowFrame>` dão arrastar, redimensionar por qualquer borda, minimizar, maximizar, empilhamento (a última janela mexida sempre fica por cima) e uma taskbar que sabe automaticamente quais "programas" existem — tudo isso sem que a taskbar ou o gerenciador de janelas saibam o que é um terminal. Qualquer programa novo só precisa chamar o hook e desenhar seu próprio conteúdo dentro do frame. Clicar fora de qualquer janela minimiza todas de uma vez, pra quem só quer ler a página em paz.
 
-1. Crie `src/content/blog/pt/meu-post.mdx` e `src/content/blog/en/my-post.mdx` (o slug do arquivo vira a URL: `/pt/blog/meu-post`).
-2. No topo de cada arquivo, exporte os metadados como um objeto JS (⚠️ **não** use frontmatter em YAML com `---` — veja o porquê no README para agentes):
+### Zero cor hardcoded
 
-   ```mdx
-   export const metadata = {
-     title: "Título do post",
-     summary: "Resumo curto que aparece no card da listagem.",
-     date: "2026-08-15",
-     translations: { en: "my-post" }, // slug da versão no outro idioma
-   };
-
-   Conteúdo em Markdown normal a partir daqui — títulos com `##`, **negrito**,
-   `código inline`, blocos de código, listas, links, tudo funciona.
-   ```
-
-3. `translations` é importante: sem ele, o botão de troca de idioma na página do post cai de volta pra listagem `/blog` em vez de ir direto pro post traduzido (posts em idiomas diferentes costumam ter slugs diferentes).
-
-A home mostra sempre os **3 posts mais recentes** (por `date`); a listagem completa fica em `/blog`. Nenhum dos dois precisa ser atualizado manualmente — ambos leem os arquivos em `src/content/blog/` automaticamente.
-
-## Currículo
-
-O currículo (`/[lang]/resume`) e o PDF baixável (`/[lang]/resume/pdf`) são gerados a partir do mesmo arquivo: [`src/data/resume.json`](src/data/resume.json). Editar o currículo é editar esse JSON — a página e o PDF nunca ficam dessincronizados.
+Todo o tema (inclusive os botões coloridos das janelas) vem de tokens CSS semânticos — trocar o tema claro/escuro, ou dar um novo significado a uma cor, nunca exige caçar hex codes espalhados pelos componentes.
 
 ## Stack
 
 - **Next.js 16** (App Router, Turbopack)
-- **Tailwind CSS v4** — cores/temas via tokens CSS em [`src/app/globals.css`](src/app/globals.css)
+- **Tailwind CSS v4** — tokens de tema em [`src/app/globals.css`](src/app/globals.css)
 - **IBM Plex Mono / IBM Plex Sans** via `next/font/google`
 - **MDX** (`@next/mdx`) para os posts do blog
-- **`@react-pdf/renderer`** para gerar o PDF do currículo sob demanda
+- **`@react-pdf/renderer`** para o PDF do currículo, gerado sob demanda
+- Sistema de janelas e VFS simulado feitos do zero — sem libs de terceiros
 
-Para detalhes de arquitetura e convenções do projeto, veja [`AGENTS.md`](AGENTS.md).
+---
+
+Quer rodar o projeto localmente, adicionar um novo projeto ao portfólio ou escrever um post no blog? Veja **[DEVELOPMENT.md](DEVELOPMENT.md)**.
