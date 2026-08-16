@@ -94,5 +94,11 @@
   },
   "footer": {
     "contact": "Get in touch with me at"
+  },
+  "fileExplorer": {
+    "root": "root",
+    "up": "Go up",
+    "empty": "This folder is empty.",
+    "closePreview": "Close preview"
   }
 }

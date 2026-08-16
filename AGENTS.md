@@ -55,18 +55,19 @@ A página de post (`/[lang]/blog/[slug]`) faz `import(`@/content/blog/${lang}/${
 - `icons.tsx` — `GithubIcon`/`LinkedinIcon` (SVG inline; lucide-react removeu ícones de marca) e `GITHUB_LINK_CLASSNAME` (estilo de hover compartilhado entre o social do hero e o botão "Repositório" dos cards).
 - `TopBar` — nav + `LangSwitcher` + `ThemeToggle`, renderizada uma vez em `src/app/[lang]/layout.tsx`, compartilhada por todas as rotas.
 
-## Terminal simulado ("janela" flutuante)
+## Terminal e Explorador de Arquivos ("janelas" flutuantes)
 
-Há um terminal interativo flutuante, montado uma vez em `src/app/[lang]/layout.tsx`, presente em todas as rotas. A arquitetura é dividida em duas camadas pra dar pra adicionar outros "programas" (ex.: um futuro explorador de arquivos) sem duplicar a mecânica de janela:
+Há dois "programas" flutuantes montados uma vez em `src/app/[lang]/layout.tsx`, presentes em todas as rotas: um Terminal e um Explorador de Arquivos. A arquitetura é dividida em duas camadas pra permitir isso — e futuros programas — sem duplicar a mecânica de janela:
 
-- `src/components/window/` — sistema de janelas **genérico**, sem saber nada sobre terminal: `useWindow()` (mode/posição/tamanho, arrastar, redimensionar por qualquer borda, minimizar/maximizar/fechar, persistência entre remounts de troca de idioma), `WindowFrame` (chrome: titlebar com os 3 botões coloridos + alças de redimensionar), `WindowManagerContext`/`Taskbar` (registro de programas abertos pra barra de tarefas mostrar um botão por programa). Qualquer novo "programa" chama `useWindow({id, title, icon, defaultSize})` e renderiza `<WindowFrame>` — essa é a "interface" que todo programa implementa.
-- `src/components/apps/Terminal/` — o Terminal em si, construído em cima da camada acima: `useShell` (boot, digitação, log, histórico, autocomplete, comandos) + `index.tsx` (composição).
+- `src/components/window/` — sistema de janelas **genérico**, sem saber nada sobre terminal/explorador: `useWindow({id, title, icon, defaultSize, minSize?, defaultMode?})` (mode/posição/tamanho, arrastar, redimensionar por qualquer borda, minimizar/maximizar/fechar, persistência entre remounts de troca de idioma — `Map` module-level por `id`), `WindowFrame` (chrome: titlebar com os 3 botões coloridos + alças de redimensionar), `WindowManagerContext`/`Taskbar` (registro de programas abertos pra barra de tarefas mostrar um botão por programa). Qualquer novo "programa" chama `useWindow(...)` e renderiza `<WindowFrame>` — essa é a "interface" que todo programa implementa. `defaultMode` (default `"open"`) só vale na primeira montagem de verdade — o Explorador usa `"minimized"` pra não abrir sobreposto ao Terminal.
+- `src/components/apps/Terminal/` — `useShell` (boot, digitação, log, histórico, autocomplete, comandos) + `index.tsx` (composição).
+- `src/components/apps/FileExplorer/` — `useExplorer` (cwd + abrir um nó: pasta desce, imagem/texto mostra preview inline, link navega/abre aba) + `FileIcon` (ícone por tipo de nó) + `index.tsx` (composição: breadcrumb, botão "subir", grid de ícones ou preview).
 
-O Terminal navega um **sistema de arquivos simulado** (`src/lib/vfs/`) construído a partir de arquivos de verdade em disco, não de dados hardcoded:
+Os dois navegam o **mesmo sistema de arquivos simulado** (`src/lib/vfs/`), construído a partir de arquivos de verdade em disco, não de dados hardcoded — `buildFileSystem(lang)` é chamado uma vez em `layout.tsx` e passado como prop `fs` pra ambos os apps.
 Tudo mora dentro de `public/vfs/` — precisa ser público mesmo pra imagem virar `<img src>` de verdade (arquivo em `src/` não é servido por URL, só compilado). Não tem split entre pasta de conteúdo e pasta pública: é uma pasta só.
-- `public/vfs/{lang}/` — arquivos de texto (`.txt`) e "atalhos" (`.link`, cujo conteúdo é uma URL/rota), um por idioma. A estrutura de pastas aqui **é** a árvore que `ls`/`cd` percorrem — adicionar um arquivo novo (texto, link ou imagem) é só soltar ele na pasta certa, sem mexer em código (mesmo espírito do pipeline de blog).
+- `public/vfs/{lang}/` — arquivos de texto (`.txt`) e "atalhos" (`.link`, cujo conteúdo é uma URL/rota), um por idioma. A estrutura de pastas aqui **é** a árvore que `ls`/`cd`/o Explorador percorrem — adicionar um arquivo novo (texto, link ou imagem) é só soltar ele na pasta certa, sem mexer em código (mesmo espírito do pipeline de blog).
 - `public/vfs/assets/` — imagens compartilhadas entre os dois idiomas, mescladas na raiz da árvore por `buildFileSystem()`. Imagem específica de um idioma pode ir direto dentro de `public/vfs/{lang}/` também — `readTree()` reconhece os três tipos (texto/link/imagem) em qualquer pasta.
-- `cd`/`ls` navegam só dentro dessa simulação (não saem da página); o comando `open <arquivo>` é quem decide navegar pra uma rota real (`.link` interno) ou abrir em nova aba (`.link` externo/imagem).
+- No Terminal, `cd`/`ls` navegam só dentro dessa simulação (não saem da página); o comando `open <arquivo>` é quem decide navegar pra uma rota real (`.link` interno) ou abrir em nova aba (`.link` externo/imagem). No Explorador, clicar numa pasta desce, num arquivo de texto/imagem mostra preview inline na própria janela, num link aplica a mesma regra interno/externo do `open`.
 
 ## Verificação antes de considerar uma tarefa pronta
 

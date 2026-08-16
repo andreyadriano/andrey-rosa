@@ -30,4 +30,8 @@ export interface WindowOptions {
   icon: IconComponent;
   defaultSize: { width: number; height: number };
   minSize?: { width: number; height: number };
+  // Modo na primeira montagem de verdade (não numa troca de idioma, que
+  // restaura o modo persistido). Default "open" — usado pelo Terminal, que
+  // quer aparecer com a animação de boot já na primeira visita.
+  defaultMode?: WindowMode;
 }

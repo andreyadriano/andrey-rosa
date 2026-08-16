@@ -94,5 +94,11 @@
   },
   "footer": {
     "contact": "Entre em contato comigo pelo"
+  },
+  "fileExplorer": {
+    "root": "raiz",
+    "up": "Voltar",
+    "empty": "Esta pasta está vazia.",
+    "closePreview": "Fechar visualização"
   }
 }

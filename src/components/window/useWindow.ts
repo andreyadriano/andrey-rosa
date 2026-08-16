@@ -53,13 +53,20 @@ export interface UseWindowResult {
 }
 
 export function useWindow(options: WindowOptions): UseWindowResult {
-  const { id, title, icon, defaultSize, minSize = DEFAULT_MIN_SIZE } = options;
+  const {
+    id,
+    title,
+    icon,
+    defaultSize,
+    minSize = DEFAULT_MIN_SIZE,
+    defaultMode = "open",
+  } = options;
   const { upsert, remove } = useWindowManager();
 
   const persisted = persistedWindows.get(id);
   const isFreshMount = useRef(persisted === undefined);
 
-  const [mode, setMode] = useState<WindowMode>(persisted?.mode ?? "open");
+  const [mode, setMode] = useState<WindowMode>(persisted?.mode ?? defaultMode);
   const [rect, setRect] = useState<Rect | null>(persisted?.rect ?? null);
   const [preMaximizeRect, setPreMaximizeRect] = useState<Rect | null>(
     persisted?.preMaximizeRect ?? null,

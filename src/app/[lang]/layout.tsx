@@ -16,6 +16,7 @@ import { Footer } from "@/components/Footer";
 import { WindowManagerProvider } from "@/components/window/WindowManagerContext";
 import { Taskbar } from "@/components/window/Taskbar";
 import { TerminalApp } from "@/components/apps/Terminal";
+import { FileExplorerApp } from "@/components/apps/FileExplorer";
 import { buildFileSystem } from "@/lib/vfs/build";
 import resumeData from "@/data/resume.json";
 import type { Lang, ResumeData } from "@/types";
@@ -75,6 +76,13 @@ export default async function LangLayout({
           rows={terminalRows}
           fs={fileSystem}
           help={terminal.help}
+        />
+        <FileExplorerApp
+          fs={fileSystem}
+          rootLabel={dict.fileExplorer.root}
+          upLabel={dict.fileExplorer.up}
+          emptyLabel={dict.fileExplorer.empty}
+          closePreviewLabel={dict.fileExplorer.closePreview}
         />
         <Taskbar />
       </WindowManagerProvider>
