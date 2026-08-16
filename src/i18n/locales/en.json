@@ -100,5 +100,9 @@
     "up": "Go up",
     "empty": "This folder is empty.",
     "closePreview": "Close preview"
+  },
+  "taskbar": {
+    "minimized": "minimized",
+    "closed": "closed"
   }
 }

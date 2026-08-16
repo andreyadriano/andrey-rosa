@@ -84,7 +84,10 @@ export default async function LangLayout({
           emptyLabel={dict.fileExplorer.empty}
           closePreviewLabel={dict.fileExplorer.closePreview}
         />
-        <Taskbar />
+        <Taskbar
+          minimizedLabel={dict.taskbar.minimized}
+          closedLabel={dict.taskbar.closed}
+        />
       </WindowManagerProvider>
     </LangAlternateProvider>
   );

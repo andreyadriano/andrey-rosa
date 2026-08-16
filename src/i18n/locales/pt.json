@@ -100,5 +100,9 @@
     "up": "Voltar",
     "empty": "Esta pasta está vazia.",
     "closePreview": "Fechar visualização"
+  },
+  "taskbar": {
+    "minimized": "minimizado",
+    "closed": "fechado"
   }
 }
