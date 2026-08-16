@@ -36,7 +36,7 @@ export default async function ResumePage({ params }: ResumePageProps) {
           </div>
           <a
             href={`/${lang}/resume/pdf`}
-            download
+            download={`cv-andrey-${lang}.pdf`}
             className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-fg hover:bg-accent-hover transition-colors"
           >
             <Download size={16} strokeWidth={1.75} />

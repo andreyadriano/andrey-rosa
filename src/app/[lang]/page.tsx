@@ -106,7 +106,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <SignalDivider />
               <a
                 href={`/${lang}/resume/pdf`}
-                download
+                download={`cv-andrey-${lang}.pdf`}
                 className="font-mono text-sm font-medium text-accent-2 hover:text-accent-2-hover transition-colors underline underline-offset-4 decoration-accent-2/40"
               >
                 {dict.home.hero.ctaResume} ↓

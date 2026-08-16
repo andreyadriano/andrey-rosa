@@ -1,6 +1,6 @@
-# andrey-website
+# NextJS Portfolio
 
-Site pessoal / portfólio de Andrey Adriano da Rosa. Next.js (App Router) com suporte a português e inglês, currículo gerado dinamicamente em PDF e blog em Markdown/MDX — sem CMS, sem banco de dados.
+Site pessoal / portfólio. Next.js (App Router) com suporte a português e inglês, currículo gerado dinamicamente em PDF e blog em Markdown/MDX — sem CMS, sem banco de dados.
 
 ## Rodando localmente
 

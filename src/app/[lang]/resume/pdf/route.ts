@@ -8,13 +8,17 @@
 import { renderToBuffer } from "@react-pdf/renderer";
 import { NextResponse } from "next/server";
 import { ResumeDocument } from "@/components/pdf/ResumeDocument";
-import { getDictionary, isValidLocale } from "@/i18n/config";
+import { getDictionary, isValidLocale, locales } from "@/i18n/config";
 import resumeData from "@/data/resume.json";
 import type { Lang, ResumeData } from "@/types";
 
 export const runtime = "nodejs";
 
 const resume = resumeData as ResumeData;
+
+export async function generateStaticParams() {
+  return locales.map((lang: Lang) => ({ lang }));
+}
 
 export async function GET(
   _request: Request,

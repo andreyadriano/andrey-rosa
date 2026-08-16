@@ -12,10 +12,15 @@ import createMDX from "@next/mdx";
 const withMDX = createMDX({});
 
 const nextConfig: NextConfig = {
+  output: "export",
   experimental: {
     mdxRs: true,
   },
   images: {
+    // output: 'export' não tem servidor pra otimizar imagem sob demanda —
+    // sem isso, next/image aponta pra /_next/image?... (rota que não
+    // existe em export estático) e a foto quebra.
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
