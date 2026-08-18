@@ -64,4 +64,7 @@ export interface Post {
   date: string;
   slug: string;
   readingTime: number;
+  // Chave de BLOG_ICONS (@/components/blogIcons). Ausente cai no ícone
+  // genérico.
+  icon?: string;
 }

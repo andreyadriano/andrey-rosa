@@ -17,6 +17,7 @@ interface PostMetadata {
   title: string;
   summary: string;
   date: string;
+  icon?: string;
 }
 
 function postsDir(lang: Lang): string {
@@ -50,6 +51,7 @@ async function getPostMeta(lang: Lang, slug: string): Promise<Post | null> {
       title: metadata.title,
       summary: metadata.summary,
       date: metadata.date,
+      icon: metadata.icon,
       readingTime: getReadingTime(lang, slug),
     };
   } catch {
