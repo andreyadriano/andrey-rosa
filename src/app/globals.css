@@ -137,6 +137,16 @@ body {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* <a> já vira "pointer" nativamente no navegador; <button> não (o padrão
  * do browser é "default"), então precisa disso pra parecer clicável.
  * Cursor do sistema, sem imagem customizada. */

@@ -30,6 +30,7 @@
       "ctaProjects": "View projects",
       "ctaBlog": "Read blog",
       "ctaResume": "Download resume (PDF)",
+      "terminalHint": "psst — there's a working terminal (and a file explorer) tucked in the corner. Try `help`.",
       "terminal": {
         "prompt": "visitor@andrey",
         "command": "whoami",

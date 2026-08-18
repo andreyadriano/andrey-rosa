@@ -30,6 +30,7 @@
       "ctaProjects": "Ver projetos",
       "ctaBlog": "Ler blog",
       "ctaResume": "Baixar currículo (PDF)",
+      "terminalHint": "psst — tem um terminal (e um explorador de arquivos) funcionais no canto da tela. Dá um `help`.",
       "terminal": {
         "prompt": "visitante@andrey",
         "command": "whoami",

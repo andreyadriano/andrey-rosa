@@ -12,7 +12,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Download } from "lucide-react";
+import { Download, Terminal as TerminalIcon } from "lucide-react";
 import { SectionLabel } from "@/components/SectionLabel";
 import { SignalDivider } from "@/components/SignalDivider";
 import { Reveal } from "@/components/Reveal";
@@ -97,6 +97,11 @@ export default async function HomePage({ params }: HomePageProps) {
                 </a>
               ))}
             </div>
+
+            <p className="mt-6 flex items-center justify-center gap-2 font-mono text-xs text-fg-muted/80 md:justify-start">
+              <TerminalIcon size={14} strokeWidth={1.75} className="shrink-0 text-accent-2" />
+              {dict.home.hero.terminalHint}
+            </p>
           </div>
 
           <div className="hidden md:block mx-auto w-[clamp(11rem,18vw,20rem)]">
