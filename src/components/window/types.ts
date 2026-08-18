@@ -34,4 +34,12 @@ export interface WindowOptions {
   // restaura o modo persistido). Default "open" — usado pelo Terminal, que
   // quer aparecer com a animação de boot já na primeira visita.
   defaultMode?: WindowMode;
+  // Calcula o retângulo inicial (primeira montagem de verdade) a partir do
+  // tamanho padrão. Default: centralizado na viewport. Usado pelo Terminal
+  // pra abrir ancorado num canto em vez de por cima do conteúdo central.
+  getDefaultRect?: (size: { width: number; height: number }) => Rect;
+  // Se a viewport for mais estreita que isso na primeira montagem, ignora
+  // defaultMode e abre minimizada (o usuário ainda pode abrir pela
+  // Taskbar). Default: sem limite, sempre respeita defaultMode.
+  minOpenWidth?: number;
 }

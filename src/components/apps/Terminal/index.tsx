@@ -9,12 +9,47 @@
 import { Terminal as TerminalIcon } from "lucide-react";
 import { useWindow } from "@/components/window/useWindow";
 import { WindowFrame } from "@/components/window/WindowFrame";
+import type { Rect } from "@/components/window/types";
 import type { VfsDirectory } from "@/lib/vfs/types";
 import { useShell } from "./useShell";
 import type { ErrorMessages, HelpEntry, Row } from "./types";
 
 const APP_ID = "terminal";
-const DEFAULT_SIZE = { width: 520, height: 420 };
+// Tamanho usado tanto pro redimensionamento padrão (maximizar/restaurar)
+// quanto pro rect inicial abaixo — de propósito menor que antes, pra abrir
+// como um widget discreto no canto, não uma janela dominante.
+const DEFAULT_SIZE = { width: 420, height: 320 };
+
+// max-w-6xl (1152px) + px-6 de padding dos dois lados (24px cada) — a
+// largura total da coluna de conteúdo centralizada da hero (ver
+// src/app/[lang]/page.tsx). Usado pra calcular a borda direita real do
+// conteúdo em vez de supor uma largura de tela fixa: acima de
+// CONTENT_MAX_WIDTH o conteúdo fica centralizado com margem sobrando nas
+// laterais, e é só nessa margem que o terminal pode abrir sem sobrepor.
+const CONTENT_MAX_WIDTH = 1200;
+const MARGIN = 24;
+const MIN_TERMINAL_WIDTH = 320;
+// Só abre sozinho se sobrar espaço suficiente na margem lateral pra um
+// terminal minimamente usável; abaixo disso (a maioria das telas,
+// incluindo mobile) começa minimizado na Taskbar, sem cobrir nada.
+const MIN_OPEN_WIDTH = CONTENT_MAX_WIDTH + (MIN_TERMINAL_WIDTH + MARGIN) * 2;
+const TASKBAR_CLEARANCE = 64; // espaço reservado pra Taskbar fixa no rodapé
+
+function getBottomRightRect(size: { width: number; height: number }): Rect {
+  const contentRightEdge =
+    window.innerWidth > CONTENT_MAX_WIDTH
+      ? (window.innerWidth + CONTENT_MAX_WIDTH) / 2
+      : window.innerWidth;
+  const maxWidth = window.innerWidth - contentRightEdge - MARGIN;
+  const width = Math.min(size.width, maxWidth);
+  const height = Math.min(size.height, window.innerHeight - TASKBAR_CLEARANCE - MARGIN);
+  return {
+    x: window.innerWidth - width - MARGIN,
+    y: window.innerHeight - height - TASKBAR_CLEARANCE,
+    width,
+    height,
+  };
+}
 
 interface TerminalAppProps {
   prompt: string;
@@ -40,6 +75,8 @@ export function TerminalApp({
     title: "terminal",
     icon: TerminalIcon,
     defaultSize: DEFAULT_SIZE,
+    getDefaultRect: getBottomRightRect,
+    minOpenWidth: MIN_OPEN_WIDTH,
   });
   const {
     phase,

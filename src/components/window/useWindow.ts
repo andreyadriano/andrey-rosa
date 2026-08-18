@@ -69,6 +69,8 @@ export function useWindow(options: WindowOptions): UseWindowResult {
     defaultSize,
     minSize = DEFAULT_MIN_SIZE,
     defaultMode = "open",
+    getDefaultRect = getCenteredRect,
+    minOpenWidth,
   } = options;
   const { upsert, remove } = useWindowManager();
 
@@ -129,11 +131,19 @@ export function useWindow(options: WindowOptions): UseWindowResult {
     };
   }, [isDragging, isResizing]);
 
-  // Abre centralizada assim que monta de verdade — numa troca de idioma
-  // (remount, não primeira montagem), mantém a posição restaurada.
+  // Posiciona assim que monta de verdade — numa troca de idioma (remount,
+  // não primeira montagem), mantém a posição restaurada. Se a viewport for
+  // mais estreita que minOpenWidth, ignora defaultMode e fica minimizada
+  // (evita abrir por cima do conteúdo em telas pequenas/médias).
   useEffect(() => {
     if (!isFreshMount.current) return;
-    const t = setTimeout(() => setRect(getCenteredRect(defaultSize)), 0);
+    const t = setTimeout(() => {
+      if (minOpenWidth && window.innerWidth < minOpenWidth) {
+        setMode("minimized");
+        return;
+      }
+      setRect(getDefaultRect(defaultSize));
+    }, 0);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
