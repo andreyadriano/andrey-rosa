@@ -44,6 +44,16 @@ export interface Project {
   links: ProjectLink[];
   date: string;
   featured: boolean;
+  // Screenshot real do projeto (public/images/projects/*). Quando ausente,
+  // ProjectCard gera uma capa a partir dos ícones das tags — não é
+  // obrigatório ter uma imagem pronta pra todo projeto novo.
+  image?: string;
+  // Só usado quando `image` está ausente: troca a capa gerada (ícones das
+  // tags) por uma ilustração específica — ver COVER_VARIANTS em Cover.tsx.
+  // Qualquer texto que a ilustração precise (ex.: rótulo de confiança do
+  // "chess-ai") é dela mesma decidir a partir de `lang`, não do Project —
+  // é detalhe de como a capa é desenhada, não um dado do projeto.
+  coverVariant?: string;
 }
 
 export type ProjectsData = Record<Lang, Project[]>;

@@ -39,7 +39,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
 
         <div className="mt-12 grid md:grid-cols-3 gap-5">
           {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+            <ProjectCard key={project.title} project={project} lang={lang} />
           ))}
         </div>
       </section>

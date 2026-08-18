@@ -1,13 +1,22 @@
-// src/components/ProjectCard.tsx
+// src/components/ProjectCard/index.tsx
 
 import { ExternalLink } from "lucide-react";
 import { GithubIcon, GITHUB_LINK_CLASSNAME } from "@/components/icons";
-import type { Project } from "@/types";
+import { ProjectCover } from "./Cover";
+import { StackIcon } from "./StackIcon";
+import type { Lang, Project } from "@/types";
 
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({ project, lang }: { project: Project; lang: Lang }) {
   return (
     <div className="flex h-full flex-col rounded-lg border border-border bg-surface p-5 hover:border-accent/40 hover:bg-surface-hover transition-colors">
-      <h3 className="font-mono text-base text-fg line-clamp-2 min-h-[3rem]">
+      <ProjectCover
+        image={project.image}
+        title={project.title}
+        tags={project.tags}
+        coverVariant={project.coverVariant}
+        lang={lang}
+      />
+      <h3 className="mt-4 font-mono text-base text-fg line-clamp-2 min-h-[3rem]">
         {project.title}
       </h3>
       <p className="mt-2 text-sm text-fg-muted leading-relaxed line-clamp-3 min-h-[4.25rem]">
@@ -17,8 +26,9 @@ export function ProjectCard({ project }: { project: Project }) {
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="font-mono text-[0.6875rem] font-medium px-2 py-0.5 rounded border border-border text-accent-2"
+            className="inline-flex items-center gap-1.5 font-mono text-[0.6875rem] font-medium px-2 py-0.5 rounded border border-border text-accent-2"
           >
+            <StackIcon tag={tag} />
             {tag}
           </span>
         ))}

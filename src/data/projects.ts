@@ -12,6 +12,7 @@ export const projectsByLang: ProjectsData = {
       title: "Reconhecimento de lances de xadrez com IA",
       date: "2025-03-01",
       featured: true,
+      coverVariant: "chess-ai",
       description:
         "TCC da Engenharia de Telecomunicações: reconhecimento de lances de xadrez a partir de imagens, usando Python, OpenCV e YOLOv11.",
       tags: ["Python", "OpenCV", "YOLOv11"],
@@ -34,6 +35,7 @@ export const projectsByLang: ProjectsData = {
       title: "Site comercial para Disk Gás",
       date: "2023-06-01",
       featured: true,
+      image: "/images/projects/disk-gas.webp",
       description:
         "Site institucional para um comércio de bairro, direcionando clientes para o WhatsApp. Também cuido da manutenção.",
       tags: ["HTML", "CSS", "JavaScript"],
@@ -50,6 +52,7 @@ export const projectsByLang: ProjectsData = {
       title: "Yin Yang",
       date: "2019-08-01",
       featured: true,
+      image: "/images/projects/yin-yang.webp",
       description:
         "Meu primeiro contato com programação: um jogo de ação e aventura criado em 2019 para a Feira de Jogos do curso técnico.",
       tags: ["JavaScript", "Game Dev"],
@@ -74,6 +77,7 @@ export const projectsByLang: ProjectsData = {
       title: "Chess move recognition with AI",
       date: "2025-03-01",
       featured: true,
+      coverVariant: "chess-ai",
       description:
         "Telecommunications Engineering thesis: recognizing chess moves from images using Python, OpenCV, and a YOLOv11 model.",
       tags: ["Python", "OpenCV", "YOLOv11"],
@@ -96,6 +100,7 @@ export const projectsByLang: ProjectsData = {
       title: "Commercial site for Disk Gás",
       date: "2023-06-01",
       featured: true,
+      image: "/images/projects/disk-gas.webp",
       description: "Business site for a local shop, directing customers to WhatsApp. I still maintain it.",
       tags: ["HTML", "CSS", "JavaScript"],
       links: [
@@ -111,6 +116,7 @@ export const projectsByLang: ProjectsData = {
       title: "Yin Yang",
       date: "2019-08-01",
       featured: true,
+      image: "/images/projects/yin-yang.webp",
       description:
         "My first contact with programming: an action-adventure game built in 2019 for my technical course's Game Fair.",
       tags: ["JavaScript", "Game Dev"],
