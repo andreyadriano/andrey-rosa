@@ -26,7 +26,7 @@
     "hero": {
       "availability": "Open to new opportunities",
       "greeting": "Hi, I'm",
-      "subtitle": "Software developer | Embedded Linux & VoIP",
+      "subtitle": "Fullstack Software Developer",
       "ctaProjects": "View projects",
       "ctaBlog": "Read blog",
       "ctaResume": "Download resume (PDF)",
@@ -76,15 +76,15 @@
           "useOpen": "cat: {arg}: use \"open\" to open this file",
           "commandNotFound": "bash: {cmd}: command not found"
         },
-        "focus": "Embedded Linux & VoIP",
+        "focus": "Fullstack Development",
         "experience": "3+ years",
-        "stack": "Go · React · C · Lua · Asterisk",
+        "stack": "Go · React · JavaScript · C · Java",
         "location": "Santa Catarina, Brazil"
       }
     },
     "about": {
       "label": "About me",
-      "text": "I'm a Telecommunications Engineer (IFSC) and have spent the last ~2 years as a software developer at Intelbras. Day to day, I build applications for IP telephony products — phones and PABXs — mainly working with Go, React, C, and Lua, alongside embedded Linux based on OpenWrt and the Yocto Project.\n\nMy background spans both a technician and an engineering degree in telecommunications, giving me a solid foundation in networking, communication protocols, and embedded systems — knowledge I apply directly to building VoIP software."
+      "text": "I'm a fullstack software developer and have spent the last ~2 years at Intelbras, building applications across the backend and frontend — architecture decisions, APIs, and web interfaces — mainly with Go, React, JavaScript, and C.\n\nI hold a degree in Telecommunications Engineering from IFSC, which gave me a solid foundation in networking and communication protocols. Over my career, I've also applied that knowledge to IP telephony products and embedded Linux."
     },
     "projects": {
       "label": "Featured projects",
@@ -104,7 +104,7 @@
   },
   "blogPage": {
     "title": "Blog",
-    "subtitle": "Notes and things I've learned about software development, embedded Linux, and VoIP.",
+    "subtitle": "Notes and things I've learned about software development, with the occasional dive into embedded Linux and VoIP.",
     "back": "← Back to blog"
   },
   "footer": {

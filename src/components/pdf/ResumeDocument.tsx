@@ -8,7 +8,7 @@
 // nunca renderizado no browser — os componentes do @react-pdf/renderer
 // (Document, Page, View...) não são elementos DOM, são primitivas de PDF.
 
-import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
+import { Document, Link, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import type { Resume } from "@/types";
 
 const ACCENT = "#3f8f52";
@@ -41,6 +41,11 @@ const styles = StyleSheet.create({
   contactItem: {
     fontSize: 8.5,
     color: MUTED,
+  },
+  contactLink: {
+    fontSize: 8.5,
+    color: ACCENT,
+    textDecoration: "none",
   },
   summary: {
     marginTop: 10,
@@ -118,8 +123,15 @@ export function ResumeDocument({
         <Text style={styles.name}>{resume.name}</Text>
         <Text style={styles.role}>{resume.role}</Text>
         <View style={styles.contactRow}>
-          <Text style={styles.contactItem}>{resume.email}</Text>
-          <Text style={styles.contactItem}>{resume.linkedin}</Text>
+          <Link style={styles.contactLink} src={`mailto:${resume.email}`}>
+            {resume.email}
+          </Link>
+          <Link style={styles.contactLink} src={`https://${resume.linkedin}`}>
+            {resume.linkedin}
+          </Link>
+          <Link style={styles.contactLink} src={`https://${resume.github}`}>
+            {resume.github}
+          </Link>
         </View>
 
         <Text style={styles.summary}>{resume.summary}</Text>
@@ -165,7 +177,11 @@ export function ResumeDocument({
 
         <View style={styles.section} wrap={false}>
           <Text style={styles.sectionTitle}>{labels.skills}</Text>
-          <Text style={styles.plainList}>{resume.skills.join(", ")}</Text>
+          {Object.entries(resume.skills).map(([category, skills]) => (
+            <Text key={category} style={styles.plainList}>
+              {category}: {skills.join(", ")}
+            </Text>
+          ))}
         </View>
 
         <View style={styles.section} wrap={false}>

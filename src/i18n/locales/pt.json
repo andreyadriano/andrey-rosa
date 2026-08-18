@@ -26,7 +26,7 @@
     "hero": {
       "availability": "Disponível para novas oportunidades",
       "greeting": "Olá, eu sou",
-      "subtitle": "Desenvolvedor de software | Linux Embarcado & VoIP",
+      "subtitle": "Desenvolvedor de software fullstack",
       "ctaProjects": "Ver projetos",
       "ctaBlog": "Ler blog",
       "ctaResume": "Baixar currículo (PDF)",
@@ -76,15 +76,15 @@
           "useOpen": "cat: {arg}: use \"open\" pra abrir este arquivo",
           "commandNotFound": "bash: {cmd}: comando não encontrado"
         },
-        "focus": "Linux Embarcado & VoIP",
+        "focus": "Desenvolvimento Fullstack",
         "experience": "3+ anos",
-        "stack": "Go · React · C · Lua · Asterisk",
+        "stack": "Go · React · JavaScript · C · Java",
         "location": "Santa Catarina, Brasil"
       }
     },
     "about": {
       "label": "Sobre mim",
-      "text": "Sou engenheiro de Telecomunicações formado pelo IFSC e atuo há cerca de 2 anos como desenvolvedor de software na Intelbras. No dia a dia, construo aplicações para produtos de telefonia IP — telefones e PABXs — trabalhando principalmente com Go, React, C e Lua, além de lidar com Linux embarcado baseado em OpenWrt e Yocto Project.\n\nMinha formação dupla em telecomunicações, como técnico e engenheiro, me deu uma base sólida em redes, protocolos de comunicação e sistemas embarcados — conhecimento que aplico diretamente no desenvolvimento de software para produtos de VoIP."
+      "text": "Sou desenvolvedor de software fullstack e atuo há cerca de 2 anos na Intelbras, construindo aplicações do backend ao frontend — decisões de arquitetura, APIs e interfaces web — principalmente com Go, React, JavaScript e C.\n\nTenho formação em Engenharia de Telecomunicações pelo IFSC, o que me deu uma base sólida em redes e protocolos de comunicação. Ao longo da carreira, também apliquei esse conhecimento a produtos de telefonia IP e Linux embarcado."
     },
     "projects": {
       "label": "Projetos em destaque",
@@ -104,7 +104,7 @@
   },
   "blogPage": {
     "title": "Blog",
-    "subtitle": "Anotações e aprendizados sobre desenvolvimento de software, Linux embarcado e VoIP.",
+    "subtitle": "Anotações e aprendizados sobre desenvolvimento de software, com alguns mergulhos em Linux embarcado e VoIP.",
     "back": "← Voltar ao blog"
   },
   "footer": {

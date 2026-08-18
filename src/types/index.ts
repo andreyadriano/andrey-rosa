@@ -20,8 +20,9 @@ export interface Resume {
   role: string;
   email: string;
   linkedin: string;
+  github: string;
   summary: string;
-  skills: string[];
+  skills: Record<string, string[]>;
   languages: string[];
   education: EducationItem[];
   experience: ExperienceItem[];

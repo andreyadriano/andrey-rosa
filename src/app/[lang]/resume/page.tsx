@@ -65,6 +65,14 @@ export default async function ResumePage({ params }: ResumePageProps) {
             >
               {data.linkedin}
             </a>
+            <a
+              href={`https://${data.github}`}
+              target="_blank"
+              rel="noreferrer"
+              className="text-accent-2 hover:text-accent-2-hover underline underline-offset-4 decoration-accent-2/40 transition-colors"
+            >
+              {data.github}
+            </a>
           </div>
           <p className="mt-5 text-fg-subtle leading-relaxed">{data.summary}</p>
 
@@ -115,14 +123,21 @@ export default async function ResumePage({ params }: ResumePageProps) {
 
           <div className="mt-12">
             <SectionLabel>{dict.resumePage.sections.skills}</SectionLabel>
-            <div className="flex flex-wrap gap-2">
-              {data.skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="font-mono text-[0.6875rem] font-medium px-2 py-0.5 rounded border border-border text-accent-2"
-                >
-                  {skill}
-                </span>
+            <div className="space-y-3">
+              {Object.entries(data.skills).map(([category, skills]) => (
+                <div key={category} className="flex flex-wrap items-center gap-2">
+                  <span className="font-mono text-xs text-fg-muted w-full sm:w-auto sm:min-w-40">
+                    {category}
+                  </span>
+                  {skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="font-mono text-[0.6875rem] font-medium px-2 py-0.5 rounded border border-border text-accent-2"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               ))}
             </div>
           </div>

@@ -1,34 +1,17 @@
 {
   "pt": {
     "name": "Andrey Adriano da Rosa",
-    "role": "Desenvolvedor Fullstack | VoIP & Linux Embarcado",
+    "role": "Desenvolvedor de Software Fullstack",
     "email": "andrey.adriano01@hotmail.com",
     "linkedin": "linkedin.com/in/andrey-adriano-da-rosa",
-    "summary": "Engenheiro de Telecomunicações e desenvolvedor de software com 3 anos de experiência, dedicado a evoluir e entregar cada vez mais. Minha experiência profissional envolve o desenvolvimento de soluções VoIP e aplicações fullstack para produtos de telefonia IP, como telefones, centrais telefônicas e softphones — atuando desde o Linux embarcado até o desenvolvimento web, com diversas linguagens e frameworks.",
-    "skills": [
-      "Go",
-      "Gin",
-      "React",
-      "JavaScript",
-      "AngularJS",
-      "Bootstrap",
-      "C",
-      "Python",
-      "Lua",
-      "Java (Android)",
-      "SIP 2.0",
-      "Asterisk",
-      "PJSIP",
-      "ARI",
-      "VoIP",
-      "Linux Embarcado",
-      "OpenWrt",
-      "Yocto Project",
-      "Docker",
-      "SQL / PostgreSQL",
-      "Redes de Computadores"
-    ],
-    "languages": ["Português (nativo)", "Inglês (avançado)"],
+    "github": "github.com/andreyadriano",
+    "summary": "Desenvolvedor de software fullstack com 3 anos de experiência, do backend ao frontend, em arquitetura, APIs e integração de sistemas. Também tenho domínio de Linux embarcado e VoIP, aplicado a produtos de telefonia IP como telefones, centrais e softphones.",
+    "skills": {
+      "Linguagens & Frameworks": ["Go", "React", "JavaScript", "Java", "C", "AngularJS", "Bootstrap", "Gin"],
+      "Dados & Infra": ["Docker", "SQL (PostgreSQL, MariaDB)", "Redes de Computadores"],
+      "VoIP, Telefonia & Embarcado": ["VoIP", "SIP 2.0", "Asterisk", "PJSIP", "ARI", "Lua", "Linux Embarcado", "OpenWrt", "Yocto Project"]
+    },
+    "languages": ["Português (nativo)", "Inglês (avançado)", "Espanhol (básico)"],
     "education": [
       {
         "institution": "IFSC - Instituto Federal de Santa Catarina",
@@ -44,63 +27,47 @@
     "experience": [
       {
         "company": "Intelbras",
-        "position": "Desenvolvedor Fullstack | VoIP | Linux Embarcado",
+        "position": "Desenvolvedor de Software Fullstack",
         "period": "Março de 2025 - Presente",
         "highlights": [
-          "No P&D de Comunicação Corporativa, participei do desenvolvimento completo de uma central de comunicação para condomínios baseada em Asterisk, atuando no controle de chamadas, na interface web e no sistema embarcado (Golang, C, Lua, React, firmware em OpenWrt) — produto bem-sucedido e amplamente elogiado por clientes acostumados a soluções tradicionais de PABX.",
-          "Corrigi e evoluí o software de telefones SIP em produção, contribuindo para a redução de problemas reportados em campo e para a melhoria dos índices de satisfação no pós-venda.",
-          "Mantive um softphone SIP em Java para Android, adaptando-o a novas versões do sistema operacional e aos requisitos da Google Play, garantindo a permanência do app na loja e a continuidade de uso pelos clientes.",
-          "Colaborei diretamente com as equipes de QA, pós-vendas e clientes em testes de campo, validando o funcionamento dos produtos e priorizando correções com base em feedback real de uso."
+          "Continuei o desenvolvimento da central de comunicação para condomínios como fullstack júnior (Go, React, Lua, firmware em OpenWrt), construindo funcionalidades maiores até o lançamento recente do produto.",
+          "Me tornei o principal mantenedor do softphone Android (Java), usado por quase 10 mil usuários mensais em cenário corporativo e condominial, mantendo-o atualizado na loja — e eliminei de vez os problemas recorrentes com recebimento de chamadas por notificação push com o app fechado.",
+          "Me tornei responsável pela interface entre pós-vendas e desenvolvimento, participando de reuniões, acompanhando chamados no Salesforce e criando tarefas para solução de problemas reportados por clientes."
         ]
       },
       {
         "company": "Intelbras",
         "position": "Estagiário de Desenvolvimento de Software",
         "period": "Abril de 2024 - Março de 2025",
-        "highlights": []
+        "highlights": [
+          "Comecei corrigindo bugs reportados pelo pós-vendas em telefones IP (C, Lua, AngularJS, firmware em Yocto) e no softphone Android (Java), ganhando contato direto com o ciclo de vida dos produtos e aprendendo desenvolvimento Android na prática.",
+          "Peguei do zero o projeto da central de comunicação para condomínios: levantamento de requisitos, arquitetura, API REST inicial, MVP do controle de chamadas em Go via ARI do Asterisk, banco de dados em MariaDB, autenticação com JWT e controle de acesso baseado em cargos (RBAC)."
+        ]
       },
       {
         "company": "RNP - Rede Nacional de Ensino e Pesquisa",
         "position": "Desenvolvedor | Bolsista",
         "period": "Julho de 2023 - Dezembro de 2023",
         "highlights": [
-          "Participei do projeto de pesquisa do PGID/RNP para integração de passkeys como fator de autenticação em um provedor de identidade Shibboleth.",
-          "O estudo desenvolvido serviu de base para a implementação de autenticação por passkeys na CAFe (Comunidade Acadêmica Federada).",
-          "Publiquei e apresentei os resultados no XXIII Simpósio Brasileiro de Segurança da Informação e de Sistemas Computacionais."
+          "Participei do projeto de pesquisa do PGID/RNP para integração de passkeys em um provedor de identidade Shibboleth, construindo um MVP do fluxo — schema em PostgreSQL, endpoints em Java/Spring Boot e telas em Thymeleaf.",
+          "O MVP serviu de base para a autenticação por passkeys na CAFe (Comunidade Acadêmica Federada); publiquei e apresentei os resultados no XXIII Simpósio Brasileiro de Segurança da Informação e de Sistemas Computacionais."
         ]
       }
     ]
   },
   "en": {
     "name": "Andrey Adriano da Rosa",
-    "role": "Fullstack Developer | VoIP & Embedded Linux",
+    "role": "Fullstack Software Developer",
     "email": "andrey.adriano01@hotmail.com",
     "linkedin": "linkedin.com/in/andrey-adriano-da-rosa",
-    "summary": "Telecommunications Engineer and software developer with 3 years of experience, dedicated to constantly growing and delivering more. My professional experience covers building VoIP solutions and full-stack applications for IP telephony products such as phones, PBXs, and softphones — working across everything from embedded Linux to web development, with a range of languages and frameworks.",
-    "skills": [
-      "Go",
-      "Gin",
-      "React",
-      "JavaScript",
-      "AngularJS",
-      "Bootstrap",
-      "C",
-      "Python",
-      "Lua",
-      "Java (Android)",
-      "SIP 2.0",
-      "Asterisk",
-      "PJSIP",
-      "ARI",
-      "VoIP",
-      "Embedded Linux",
-      "OpenWrt",
-      "Yocto Project",
-      "Docker",
-      "SQL / PostgreSQL",
-      "Computer Networking"
-    ],
-    "languages": ["Portuguese (native)", "English (advanced)"],
+    "github": "github.com/andreyadriano",
+    "summary": "Fullstack software developer with 3 years of experience, working across the backend and frontend on architecture, APIs, and systems integration. I also have a solid background in embedded Linux and VoIP, applied to IP telephony products such as phones, PBXs, and softphones.",
+    "skills": {
+      "Languages & Frameworks": ["Go", "React", "JavaScript", "Java", "C", "AngularJS", "Bootstrap", "Gin"],
+      "Data & Infra": ["Docker", "SQL (PostgreSQL, MariaDB)", "Computer Networking"],
+      "VoIP, Telephony & Embedded": ["VoIP", "SIP 2.0", "Asterisk", "PJSIP", "ARI", "Lua", "Embedded Linux", "OpenWrt", "Yocto Project"]
+    },
+    "languages": ["Portuguese (native)", "English (advanced)", "Spanish (basic)"],
     "education": [
       {
         "institution": "IFSC - Federal Institute of Santa Catarina",
@@ -116,29 +83,30 @@
     "experience": [
       {
         "company": "Intelbras",
-        "position": "Fullstack Developer | VoIP | Embedded Linux",
+        "position": "Fullstack Software Developer",
         "period": "March 2025 - Present",
         "highlights": [
-          "As part of the Corporate Communication R&D team, contributed to the full development of a condominium communication hub based on Asterisk, working across call control, the web interface, and the embedded system (Golang, C, Lua, React, firmware on OpenWrt) — a successful product, widely praised by customers used to traditional PABX solutions.",
-          "Fixed and evolved production SIP phone software, contributing to fewer field-reported issues and improved post-sales satisfaction metrics.",
-          "Maintained a Java-based SIP softphone for Android, adapting it to new OS versions and Google Play requirements to keep the app published and usable for customers.",
-          "Worked directly with QA, post-sales, and customers during field testing, validating functionality and prioritizing fixes based on real usage feedback."
+          "Continued development of the condominium communication hub as a junior fullstack developer (Go, React, Lua, firmware on OpenWrt), building out larger features through to the product's recent launch.",
+          "Became the main maintainer of the Android softphone (Java), used by nearly 10,000 monthly users across corporate and condominium settings, keeping it updated on the store — and eliminated for good the recurring issues with incoming calls via push notification when the app was closed.",
+          "Became the point of contact between post-sales and development, joining meetings, tracking cases in Salesforce, and creating tasks to resolve issues reported by customers."
         ]
       },
       {
         "company": "Intelbras",
         "position": "Software Development Intern",
         "period": "April 2024 - March 2025",
-        "highlights": []
+        "highlights": [
+          "Started out fixing bugs reported by post-sales on IP phones (C, Lua, AngularJS, firmware built with Yocto) and the Android softphone (Java), getting hands-on exposure to the product lifecycle and learning Android development hands-on.",
+          "Picked up the condominium communication hub project from scratch: requirements gathering, architecture, an initial REST API, an MVP of the call-control application in Go via Asterisk's ARI, a MariaDB database, JWT authentication, and role-based access control (RBAC)."
+        ]
       },
       {
         "company": "RNP - Brazilian National Research and Education Network",
         "position": "Developer | Research Fellow",
         "period": "July 2023 - December 2023",
         "highlights": [
-          "Contributed to RNP's PGID research project integrating passkeys as an authentication factor into a Shibboleth identity provider.",
-          "The study became the foundation for implementing passkey authentication in CAFe (Brazil's federated academic and research identity community).",
-          "Published and presented results at the XXIII Brazilian Symposium on Information Security."
+          "Contributed to RNP's PGID research project integrating passkeys into a Shibboleth identity provider, building an MVP of the flow — a PostgreSQL schema, API endpoints in Java/Spring Boot, and screens in Thymeleaf.",
+          "The MVP became the foundation for passkey authentication in CAFe (Brazil's federated academic and research identity community); I published and presented the results at the XXIII Brazilian Symposium on Information Security."
         ]
       }
     ]
