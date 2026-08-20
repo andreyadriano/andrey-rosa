@@ -21,7 +21,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   const projects = projectsByLang[lang];
 
   return (
-    <main className="bg-bg text-fg min-h-screen">
+    <main className="text-fg min-h-screen">
       <section className="max-w-6xl mx-auto px-6 py-20">
         <Link
           href={`/${lang}`}

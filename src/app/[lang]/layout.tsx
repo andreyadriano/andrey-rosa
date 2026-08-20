@@ -9,6 +9,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getDictionary, isValidLocale, locales } from "@/i18n/config";
+import { AuroraBackground } from "@/components/AuroraBackground";
 import { LangAlternateProvider } from "@/components/LangAlternateContext";
 import { LangSync } from "@/components/LangSync";
 import { TopBar } from "@/components/TopBar";
@@ -64,6 +65,7 @@ export default async function LangLayout({
 
   return (
     <LangAlternateProvider>
+      <AuroraBackground />
       <LangSync lang={lang} />
       <TopBar lang={lang} />
       {children}

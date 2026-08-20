@@ -36,7 +36,7 @@ export function MobileMenu({ navLinks }: { navLinks: NavLink[] }) {
       </button>
 
       {open && (
-        <nav className="absolute inset-x-0 top-14 border-b border-border bg-bg px-6 py-4 flex flex-col gap-4">
+        <nav className="absolute inset-x-0 top-14 border-b border-border backdrop-blur-md px-6 py-4 flex flex-col gap-4">
           {navLinks.map((link) => (
             <Link
               key={link.href}

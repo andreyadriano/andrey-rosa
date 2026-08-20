@@ -24,7 +24,7 @@ export default async function ResumePage({ params }: ResumePageProps) {
   const data = resume[lang];
 
   return (
-    <main className="bg-bg text-fg min-h-screen">
+    <main className="text-fg min-h-screen">
       <section className="max-w-6xl mx-auto px-6 py-20">
         <Link
           href={`/${lang}`}

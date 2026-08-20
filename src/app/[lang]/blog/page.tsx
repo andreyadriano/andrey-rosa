@@ -21,7 +21,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
   const posts = await getAllPosts(lang);
 
   return (
-    <main className="bg-bg text-fg min-h-screen">
+    <main className="text-fg min-h-screen">
       <section className="max-w-6xl mx-auto px-6 py-20">
         <Link
           href={`/${lang}`}

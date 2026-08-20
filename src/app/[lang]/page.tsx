@@ -14,7 +14,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Download, Terminal as TerminalIcon } from "lucide-react";
 import { SectionLabel } from "@/components/SectionLabel";
-import { SignalDivider } from "@/components/SignalDivider";
 import { Reveal } from "@/components/Reveal";
 import { ProjectCard } from "@/components/ProjectCard";
 import { PostCard } from "@/components/PostCard";
@@ -42,78 +41,46 @@ export default async function HomePage({ params }: HomePageProps) {
   const posts = (await getAllPosts(lang)).slice(0, 3);
 
   return (
-    <main className="bg-bg text-fg min-h-screen selection:bg-accent/30">
+    <main className="text-fg min-h-screen selection:bg-accent/30">
       {/* HERO */}
       <section className="border-b border-border">
-        <div className="max-w-6xl mx-auto px-6 py-24 md:py-40 min-h-[80vh] flex flex-col md:grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 md:items-center">
-          <div>
-            <h1 className="font-mono text-[clamp(1.375rem,5vw+0.5rem,3.75rem)] font-medium leading-[1.05] tracking-tight text-accent md:whitespace-nowrap text-center md:text-left">
-              Andrey Adriano da Rosa
-            </h1>
+        <div className="max-w-6xl mx-auto px-6 py-24 md:py-32 min-h-[85vh] flex flex-col items-center justify-center text-center">
+          <h1 className="font-mono text-[clamp(1.75rem,5vw+0.5rem,4rem)] font-medium leading-[1.05] tracking-tight text-accent">
+            Andrey Adriano da Rosa
+          </h1>
 
-            <h2 className="mt-4 text-lg md:text-xl font-normal text-fg-muted max-w-xl mx-auto text-center md:mx-0 md:text-left">
-              {dict.home.hero.subtitle}
-            </h2>
+          <h2 className="mt-4 text-lg md:text-2xl font-normal text-fg-muted max-w-xl">
+            {dict.home.hero.subtitle}
+          </h2>
 
-            {/* No mobile a foto entra aqui embaixo, entre o texto e os
-                botões; no desktop essa cópia fica escondida e a outra
-                (fora deste bloco) assume a coluna da direita — evita o
-                bug de auto-altura do CSS grid ao tentar usar uma foto com
-                row-span pra alcançar o mesmo efeito. */}
-            <div className="my-8 mx-auto w-[clamp(11rem,18vw,20rem)] md:hidden">
-              <Image
-                src={`https://github.com/${GITHUB_USERNAME}.png`}
-                alt="Andrey Adriano da Rosa"
-                width={400}
-                height={400}
-                className="h-auto w-full rounded-full ring-2 ring-accent/60 ring-offset-4 ring-offset-bg"
-                priority
-              />
-            </div>
+          <a
+            href={`/${lang}/resume/pdf`}
+            download={`CV_Andrey_Rosa_${lang.toUpperCase()}.pdf`}
+            className="mt-8 inline-flex items-center gap-2 rounded-md bg-accent px-6 py-3 text-sm font-medium text-accent-fg hover:bg-accent-hover transition-colors"
+          >
+            <Download size={16} strokeWidth={1.75} />
+            {dict.home.hero.ctaResume}
+          </a>
 
-            <div className="mt-8 flex flex-col items-center gap-4 md:flex-row md:items-center md:gap-5">
-              <SignalDivider />
+          <div className="mt-8 flex flex-nowrap items-center justify-center gap-1.5 md:gap-3">
+            {socials.map(({ label, href, Icon, className }) => (
               <a
-                href={`/${lang}/resume/pdf`}
-                download={`CV_Andrey_Rosa_${lang.toUpperCase()}.pdf`}
-                className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-fg hover:bg-accent-hover transition-colors"
+                key={label}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel="noreferrer"
+                className={`inline-flex items-center gap-1 md:gap-2 rounded-md border px-2.5 py-1.5 text-xs whitespace-nowrap md:px-4 md:py-2 md:text-sm font-medium transition-colors ${className}`}
               >
-                <Download size={16} strokeWidth={1.75} />
-                {dict.home.hero.ctaResume}
+                <Icon size={16} strokeWidth={1.75} />
+                {label}
               </a>
-            </div>
-
-            <div className="mt-8 flex flex-nowrap items-center justify-center gap-1.5 md:justify-start md:gap-3">
-              {socials.map(({ label, href, Icon, className }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel="noreferrer"
-                  className={`inline-flex items-center gap-1 md:gap-2 rounded-md border px-2.5 py-1.5 text-xs whitespace-nowrap md:px-4 md:py-2 md:text-sm font-medium transition-colors ${className}`}
-                >
-                  <Icon size={16} strokeWidth={1.75} />
-                  {label}
-                </a>
-              ))}
-            </div>
-
-            <p className="mt-6 flex items-center justify-center gap-2 font-mono text-xs text-fg-muted/80 md:justify-start">
-              <TerminalIcon size={14} strokeWidth={1.75} className="shrink-0 text-accent-2" />
-              {dict.home.hero.terminalHint}
-            </p>
+            ))}
           </div>
 
-          <div className="hidden md:block mx-auto w-[clamp(11rem,18vw,20rem)]">
-            <Image
-              src={`https://github.com/${GITHUB_USERNAME}.png`}
-              alt="Andrey Adriano da Rosa"
-              width={400}
-              height={400}
-              className="h-auto w-full rounded-full ring-2 ring-accent/60 ring-offset-4 ring-offset-bg"
-              priority
-            />
-          </div>
+          <p className="mt-6 flex items-center justify-center gap-2 font-mono text-xs text-fg-muted/80">
+            <TerminalIcon size={14} strokeWidth={1.75} className="shrink-0 text-accent-2" />
+            {dict.home.hero.terminalHint}
+          </p>
         </div>
       </section>
 
@@ -121,10 +88,21 @@ export default async function HomePage({ params }: HomePageProps) {
       <section className="max-w-6xl mx-auto px-6 py-20">
         <Reveal>
           <SectionLabel>{dict.home.about.label}</SectionLabel>
-          <div className="max-w-2xl space-y-4 text-lg text-fg-subtle leading-relaxed">
-            {dict.home.about.text.split("\n\n").map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+          <div className="flex flex-col-reverse md:grid md:grid-cols-[1fr_auto] gap-10 md:gap-12 md:items-center">
+            <div className="max-w-2xl space-y-4 text-lg text-fg-subtle leading-relaxed">
+              {dict.home.about.text.split("\n\n").map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+            <div className="mx-auto w-[clamp(9rem,16vw,16rem)] md:mx-0">
+              <Image
+                src={`https://github.com/${GITHUB_USERNAME}.png`}
+                alt="Andrey Adriano da Rosa"
+                width={400}
+                height={400}
+                className="h-auto w-full rounded-full ring-2 ring-accent/60 ring-offset-4 ring-offset-bg"
+              />
+            </div>
           </div>
         </Reveal>
       </section>

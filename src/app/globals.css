@@ -19,15 +19,28 @@
 :root {
   color-scheme: dark;
 
-  /* Superfícies */
-  --bg: #050605;
-  --bg-elevated: #0e0f0e;
-  --surface: rgba(255, 255, 255, 0.02);
-  --surface-hover: rgba(255, 255, 255, 0.04);
+  /* Superfícies — azul-noite bem escuro (não preto puro, não preto
+   * esverdeado): é o céu da aurora boreal por trás de tudo, mesmo fora da
+   * hero. Preenchimentos sólidos e neutros de propósito (nada de overlay
+   * colorido por cima — isso lê como "lavado", não como elevação). Quem
+   * carrega a identidade verde são as bordas abaixo, tingidas com o matiz
+   * de --accent (103 182 103). */
+  --bg: #05060d;
+  --bg-elevated: #0c1020;
+  --surface: #0e1122;
+  --surface-hover: #151a30;
 
   /* Bordas */
-  --border: rgba(255, 255, 255, 0.1);
-  --border-strong: rgba(255, 255, 255, 0.3);
+  --border: rgba(103, 182, 103, 0.14);
+  --border-strong: rgba(103, 182, 103, 0.38);
+
+  /* Paleta exclusiva da ilustração de aurora boreal (AuroraBackground) —
+   * sem correspondente semântico no resto do site, por isso tokens à
+   * parte em vez de --accent-2/--warn/etc. */
+  --aurora-sky: #111a35;
+  --aurora-teal: #4fd1c5;
+  --aurora-violet: #8b7cf6;
+  --aurora-pink: #f472b6;
 
   /* Texto */
   --fg: #e6e9e6;
@@ -65,13 +78,26 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
+  /* Mesma lógica do tema escuro: superfícies sólidas/neutras, bordas
+   * tingidas com o matiz do --accent daqui (63 143 82). */
   --bg: #ffffff;
   --bg-elevated: #f2f4f2;
-  --surface: rgba(10, 12, 10, 0.03);
-  --surface-hover: rgba(10, 12, 10, 0.06);
+  --surface: rgba(10, 12, 10, 0.035);
+  --surface-hover: rgba(10, 12, 10, 0.07);
 
-  --border: rgba(10, 12, 10, 0.1);
-  --border-strong: rgba(10, 12, 10, 0.3);
+  --border: rgba(63, 143, 82, 0.16);
+  --border-strong: rgba(63, 143, 82, 0.4);
+
+  /* No claro a aurora vira nuvem branca (ver AuroraBackground.tsx,
+   * uIsLight) — --aurora-sky é o tom de céu por trás dela, precisa de
+   * contraste de verdade contra o branco das nuvens pra ser notado num
+   * relance, não só num crop ampliado. Já passou por #eef1fb, #cfe0f5,
+   * #a3c9ef e #5b9bdb (cada vez mais forte, ainda fracos demais) antes de
+   * chegar aqui. */
+  --aurora-sky: #2f7fd1;
+  --aurora-teal: #14b8a6;
+  --aurora-violet: #7c6ff0;
+  --aurora-pink: #ec4899;
 
   --fg: #141815;
   --fg-muted: #5b655d;
@@ -90,6 +116,18 @@
   --danger: #cc3934;
   --danger-hover: #b62f2b;
   --danger-fg: #ffffff;
+}
+
+/* AuroraBackground (src/components/AuroraBackground.tsx): o véu escuro de
+ * contraste do texto (não o shader em si, que já reage ao tema via uniform
+ * — ver uIsLight no componente) some no tema claro, onde o céu já é claro
+ * e não precisa dele. Feito em CSS puro (seletor de atributo), não como
+ * className calculada em JS a partir do tema — o componente é client-only
+ * mas ainda passa por SSR, então uma className dependente de
+ * `document.documentElement` no primeiro render do cliente divergiria do
+ * HTML gerado no servidor e dispararia erro de hydration mismatch. */
+:root[data-theme="light"] .aurora-veil {
+  display: none;
 }
 
 @theme inline {

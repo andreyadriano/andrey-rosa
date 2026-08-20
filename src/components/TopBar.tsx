@@ -22,7 +22,7 @@ export async function TopBar({ lang }: { lang: Lang }) {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-bg/80 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-border backdrop-blur-md">
       <div className="relative max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-6">
         <MobileMenu navLinks={navLinks} />
 

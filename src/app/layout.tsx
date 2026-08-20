@@ -27,6 +27,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang={defaultLocale}
       className={`${plexSans.variable} ${plexMono.variable} h-full antialiased`}
+      // O script anti-flash abaixo seta data-theme="light" no <html> antes
+      // do primeiro paint, direto no DOM — fora do que o React renderizou
+      // no servidor (que não sabe a preferência salva, sempre parte do
+      // dark). Sem suppressHydrationWarning aqui, o React trata esse
+      // atributo "extra" como um mismatch de hydration, descarta a árvore
+      // inteira e a regenera do zero — e nesse processo o <script> não
+      // reexecuta (scripts inseridos via DOM/React não rodam sozinhos) e o
+      // atributo que ele tinha setado se perde, revertendo pro tema escuro
+      // silenciosamente em todo reload com o claro salvo. Isso já
+      // acontecia antes da aurora; só ficou óbvio agora porque o fundo
+      // errado passou a ser um shader verde vivo em vez de só uma cor.
+      suppressHydrationWarning
     >
       <head>
         <script

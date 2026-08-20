@@ -7,20 +7,36 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 
 type Theme = "dark" | "light";
 
 function readTheme(): Theme {
-  if (typeof document === "undefined") return "dark";
   return document.documentElement.getAttribute("data-theme") === "light"
     ? "light"
     : "dark";
 }
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>(readTheme);
+  // Default "dark" pra bater com o que o servidor sempre renderiza (ele
+  // não sabe a preferência salva). Corrigido no useEffect abaixo, depois
+  // que a hidratação já terminou — ler o DOM real (que o script anti-flash
+  // do layout já pode ter marcado como "light" antes do primeiro paint)
+  // direto no useState divergiria do HTML do servidor e geraria mismatch
+  // de hydration nesse componente (ver AGENTS.md/layout.tsx pro caso
+  // maior, no <html>, que tinha o mesmo problema).
+  const [theme, setTheme] = useState<Theme>("dark");
+
+  useEffect(() => {
+    // Sincroniza com o data-theme real do DOM (setado pelo script
+    // anti-flash antes da hidratação). Tem que ser aqui, não no useState
+    // acima — ler o DOM já no render inicial do cliente produziria um
+    // resultado diferente do HTML do servidor (que não conhece a
+    // preferência salva) e o React trataria como mismatch de hydration.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setTheme(readTheme());
+  }, []);
 
   function toggleTheme() {
     const next: Theme = theme === "light" ? "dark" : "light";

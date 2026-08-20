@@ -60,7 +60,7 @@ export default async function PostPage({ params }: PostPageProps) {
     : null;
 
   return (
-    <main className="bg-bg text-fg min-h-screen">
+    <main className="text-fg min-h-screen">
       {alternatePath && <SetLangAlternate path={alternatePath} />}
       <article className="max-w-3xl mx-auto px-6 py-20">
         <Link
